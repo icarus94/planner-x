@@ -1,0 +1,50 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+>
+<!--/*@thymesVar id="taskList" type="rs.fon.plannerx.core.task.domain.TaskList"*/-->
+<th:block th:fragment="addTask(taskList)">
+    <a class="btn btn-light btn-sm border-1 border-dark" data-bs-toggle="modal"
+       th:attr="data-bs-target='#add-task-'+${taskList.id}"
+       type="button">
+        <i class="fas fa-plus"></i>
+    </a>
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" tabindex="-1"
+         th:id="'add-task-'+${taskList.id}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <!--/*@thymesVar id="addTask" type="rs.fon.planner.domain.dto.task.AddTaskDtoInterface"*/-->
+                    <form method="post" th:action="${@SiteMap.CREATE_TASK}">
+                        <input hidden name="taskListId" th:value="${taskList.id}">
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" name="description" required type="text"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Due date</label>
+                            <input class="form-control" name="dueDate" type="datetime-local">
+                        </div>
+                        <div class="form-group">
+                            <label>Priority</label>
+                            <select class="form-control" name="taskPriority">
+                                <option th:each="priorityOpt : ${T(rs.fon.plannerx.core.task.domain.TaskPriority).values()}"
+                                        th:text="${priorityOpt}" th:value="${priorityOpt}"></option>
+                            </select>
+                        </div>
+                        <div class="mt-4 text-end">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                            <button class="btn btn-primary" type="submit">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+

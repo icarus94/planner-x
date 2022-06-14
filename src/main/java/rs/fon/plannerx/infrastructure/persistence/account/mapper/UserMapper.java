@@ -1,0 +1,33 @@
+package rs.fon.plannerx.infrastructure.persistence.account.mapper;
+
+import org.springframework.stereotype.Component;
+import rs.fon.plannerx.core.account.domain.User;
+import rs.fon.plannerx.infrastructure.persistence.account.entity.UserJpaEntity;
+
+@Component
+public class UserMapper {
+
+    public User mapToEntity(UserJpaEntity userJpaEntity) {
+        return new User(
+                userJpaEntity.getId(),
+                userJpaEntity.isActive(),
+                userJpaEntity.getEmail(),
+                userJpaEntity.getName(),
+                userJpaEntity.getSurname(),
+                userJpaEntity.getPassword(),
+                userJpaEntity.getRole()
+        );
+    }
+
+    public UserJpaEntity mapToJpaEntity(User user) {
+        return new UserJpaEntity(
+                user.getId(),
+                user.isActive(),
+                user.getEmail(),
+                user.getName(),
+                user.getPassword(),
+                user.getSurname(),
+                user.getRole()
+        );
+    }
+}                                     

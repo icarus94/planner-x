@@ -1,0 +1,13 @@
+<html lang="en"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="permission" type="rs.fon.plannerx.core.task.domain.TaskListPermission"*/-->
+<!--/*@thymesVar id="owner" type="java.lang.Boolean"*/-->
+<th:block layout:fragment="permissions(owner, permission)">
+    <th:block th:if="${owner == true}">
+        <span class="badge bg-primary text-dark">
+            <i class="fa fa-user-check"></i>
+        </span>
+    </th:block>
+    <span class="badge bg-info" th:utext="${permission.name()}"></span>
+</th:block>

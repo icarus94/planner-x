@@ -1,0 +1,74 @@
+<div class="card mt-5">
+    <div class="card-header text-center">
+        User Report
+    </div>
+    <div class="card-body">
+        <canvas id="myChart" style="margin-bottom: 50px;height:40vh;"></canvas>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    var list = /*[[${userTaskListReport}]]*/ [];
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script>
+    let chartLabels = [];
+    let doneTasks = [];
+    let unfinishedTasks = [];
+
+    list.forEach(function (value, index, array) {
+        chartLabels.push(value.taskListName);
+        doneTasks.push(value.totalCountDoneTasks);
+        unfinishedTasks.push(value.totalCountUnfinishedTasks);
+    });
+    console.log(chartLabels, doneTasks, unfinishedTasks);
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type   : 'bar',
+        data   : {
+            labels  : chartLabels,
+            datasets: [
+                {
+                    label          : 'Done tasks',
+                    data           : doneTasks,
+                    backgroundColor: '#008000',
+                    borderColor    : '#006400',
+                    borderWidth    : 1
+                },
+                {
+                    label          : 'Pending tasks',
+                    data           : unfinishedTasks,
+                    backgroundColor: '#FF0000',
+                    borderColor    : '#8B0000',
+                    borderWidth    : 1
+                },
+            ]
+        },
+        options: {
+            plugins            : {
+                title: {
+                    display: true,
+                    text   : 'Task lists - Report'
+                },
+            },
+            interaction        : {
+                intersect: false,
+            },
+            responsive         : true,
+            maintainAspectRatio: false,
+            scales             : {
+                x: {
+                    stacked: true,
+                },
+                y: {
+                    stacked : true,
+                    stepSize: 1,
+                    ticks   : {
+                        precision: 0,
+                        stepSize : 1
+                    }
+                }
+            }
+        }
+    });
+</script>

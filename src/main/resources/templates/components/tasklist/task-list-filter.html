@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-12 m-1 d-flex align-items-baseline flex-wrap">
+        <p class="m-1">Status:</p>
+        <th:block th:each="status: ${T(rs.fon.plannerx.core.task.ports.in.usertasklist.dto.TaskStatusFilter).values()}">
+            <!--/*@thymesVar id="status" type="rs.fon.plannerx.core.task.ports.in.usertasklist.dto.TaskStatusFilter"*/-->
+            <!--/*@thymesVar id="filter" type="rs.fon.plannerx.core.task.ports.in.usertasklist.dto.UserTaskListFilterDto"*/-->
+            <button data-bs-toggle="button"
+                    th:class="'task-status-filter btn btn-light border-1 border-dark m-1 '+${status.equals(filter.getTaskStatusFilter()) ? 'active' : '' }"
+                    th:value="${status}"
+                    type="button">
+                <b th:text="${status.getName()}"></b>
+            </button>
+        </th:block>
+    </div>
+    <div class="col-12 m-1 d-flex align-items-baseline flex-wrap">
+        <p class="m-1">Order by:</p>
+        <th:block
+                th:each="orderBy: ${T(rs.fon.plannerx.core.task.ports.in.usertasklist.dto.TaskOrderByFilter).values()}">
+            <!--/*@thymesVar id="orderBy" type="rs.fon.plannerx.core.task.ports.in.usertasklist.dto.TaskOrderByFilter"*/-->
+            <!--/*@thymesVar id="filter" type="rs.fon.plannerx.core.task.ports.in.usertasklist.dto.UserTaskListFilterDto"*/-->
+            <button data-bs-toggle="button"
+                    th:class="'task-order-filter btn btn-light border-1 border-dark m-1 '+${orderBy.equals(filter.getTaskOrderByFilter()) ? 'active' : '' }"
+                    th:value="${orderBy}"
+                    type="button">
+                <b th:text="${orderBy.getOrderBy()}"></b>
+            </button>
+        </th:block>
+    </div>
+</div>

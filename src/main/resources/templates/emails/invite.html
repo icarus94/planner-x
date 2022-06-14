@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Email</title>
+</head>
+<body>
+<div>
+    Hi, our user <b th:text="${user.getName()}+' '+${user.getSurname()}"></b> invites <b>you</b>
+    to join our
+    <a th:href="${#httpServletRequest.requestURI}+${@SiteMap.REGISTER}">Todo MyWebPlanner</a>
+</div>
+
+<div>
+    <p>
+        Come and register <a th:href="${#httpServletRequest.requestURI}+${@SiteMap.REGISTER}">here</a>!
+    </p>
+</div>
+</body>
+</html>

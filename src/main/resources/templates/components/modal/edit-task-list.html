@@ -1,0 +1,45 @@
+<th:block th:fragment="editTaskList(taskList)">
+    <!-- Button trigger modal -->
+    <!--/*@thymesVar id="taskList" type="rs.fon.plannerx.core.task.domain.TaskList"*/-->
+    <a class="btn btn-light btn-sm" data-bs-toggle="modal" th:attr="data-bs-target='#edit-task-list-'+${taskList.id}"
+       type="button">
+        <i class="fas fa-cog"></i>
+    </a>
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" tabindex="-1"
+         th:id="'edit-task-list-'+${taskList.id}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"
+                        th:text="#{modal.task.list.title.edit}"></h5>
+                    <button aria-label="Close" class="btn btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" th:action="${@SiteMap.UPDATE_TASK_LIST}">
+                        <div class="form-group">
+                            <label class="form-label" th:text="#{modal.task.list.label.name}"></label>
+                            <input hidden name="id" th:value="${taskList.id}">
+                            <input class="form-control" name="name" required th:value="${taskList.name}" type="text">
+                        </div>
+                        <div class="mt-4 text-end">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{modal.button.close}"
+                                    type="button"></button>
+                            <button class="btn btn-warning" th:text="#{modal.button.edit}" type="submit"></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="mx-auto">
+                        <form method="post" th:action="${@SiteMap.DELETE_TASK_LIST}">
+                            <input hidden name="id" th:value="${taskList.id}">
+                            <button class="btn btn-danger" th:text="#{modal.button.task.list.remove}"
+                                    type="submit"></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+

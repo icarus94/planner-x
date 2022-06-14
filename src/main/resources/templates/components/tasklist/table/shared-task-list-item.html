@@ -1,0 +1,25 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<!--/*@thymesVar id="userTaskLists" type="java.util.Collection"*/-->
+<!--/*@thymesVar id="userTaskList" type="rs.fon.plannerx.core.task.domain.UserTaskList"*/-->
+<div class="list-group" layout:fragment="sharedUsersTable(userTaskLists)">
+    <th:block th:each="userTaskList : ${userTaskLists}">
+        <a aria-current="true" class="list-group-item list-group-item-action" href="#" style="z-index: auto">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" th:utext="${userTaskList.getUser().getName()+' '+userTaskList.getUser().getSurname()}">
+                </h5>
+                <small>
+                    <span class="badge bg-info" th:utext="${userTaskList.getPermission().name()}">
+                    </span>
+                    <th:block
+                            th:replace="components/modal/edit-shared-task-list :: editShareTaskList(${userTaskList})"></th:block>
+                </small>
+            </div>
+            <p class="mb-1" th:utext="${userTaskList.getUser().getEmail()}"></p>
+            <small class="text-muted"
+                   th:utext="'Since: '+${#temporals.format(userTaskList.getDateCreated(), 'dd-MM-yyyy HH:mm')}">
+            </small>
+        </a>
+    </th:block>
+</div>

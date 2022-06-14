@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout_main}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Invite</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 700px">
+        <div class="card-header" th:text="#{label.login.form.title}"></div>
+        <div class="card-body">
+            <form method="POST" th:action="${@SiteMap.INVITE_USER}">
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="email" th:text="#{label.login.email}"></label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="email" name="invite_email" type="">
+                    </div>
+                </div>
+                <div class="row mb-3 col-xs-12 col-md-3 mx-auto">
+                    <button class="btn btn-success" th:text="#{label.login.form.submit}" type="submit"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

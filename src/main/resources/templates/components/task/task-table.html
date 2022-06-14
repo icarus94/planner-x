@@ -1,0 +1,48 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<table class="table task-list-table" layout:fragment="taskTable(tasks, taskList)">
+    <thead>
+    <tr>
+        <th class="header-indentation">
+            Task
+        </th>
+        <th class="duedate-column">
+            Due date
+        </th>
+        <th class="priority-column">
+            Priority
+        </th>
+        <th class="action-column">
+            Actions
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--/*@thymesVar id="task" type="rs.fon.plannerx.core.task.domain.Task"*/-->
+    <!--/*@thymesVar id="tasks" type="java.util.Set"*/-->
+    <th:block th:each="task: ${tasks}">
+        <tr>
+            <td class="first-row-cell">
+                <th:block layout:insert="~{components/task/table/first-cell :: firstCell(${task})}"></th:block>
+            </td>
+            <td>
+                <th:block
+                        th:text="${#temporals.format(task.dueDate, 'dd-MM-yyyy')}+' '+${#temporals.format(task.dueDate, 'HH:mm')}"></th:block>
+            </td>
+            <td>
+                <th:block layout:insert="~{components/task/table/task-priority :: taskPriority(${task})}"></th:block>
+            </td>
+            <td>
+                <th:block th:replace="~{components/modal/edit-task :: editTask(${task})}"></th:block>
+                <th:block th:replace="~{components/modal/remove-task :: removeTask(${task})}"></th:block>
+            </td>
+        </tr>
+    </th:block>
+    <tr>
+        <td class="text-center border-bottom-0" colspan="4">
+            <th:block th:insert="~{components/modal/add-task :: addTask(${taskList})}"></th:block>
+        </td>
+    </tr>
+    </tbody>
+</table>

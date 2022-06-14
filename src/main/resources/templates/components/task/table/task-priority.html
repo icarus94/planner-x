@@ -1,0 +1,15 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<!--/*@thymesVar id="task" type="rs.fon.plannerx.core.task.domain.Task"*/-->
+<th:block layout:fragment="taskPriority(task)"
+          th:with="TaskPriority=${T(rs.fon.plannerx.core.task.domain.TaskPriority)}">
+    <th:block th:switch="${task.taskPriority}">
+        <span class="badge bg-info" data-bs-placement="left" data-bs-toggle="tooltip" th:case="${TaskPriority.LOW}"
+              title="Low priority">Low</span>
+        <span class="badge bg-warning" data-bs-placement="left" data-bs-toggle="tooltip"
+              th:case="${TaskPriority.MEDIUM}" title="Medium priority">Medium</span>
+        <span class="badge bg-danger" data-bs-placement="left" data-bs-toggle="tooltip" th:case="${TaskPriority.HIGH}"
+              title="High priority">High</span>
+    </th:block>
+</th:block>

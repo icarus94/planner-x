@@ -1,0 +1,12 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<div class="message-item" layout:fragment="messageItem(messages)">
+    <ul>
+        <!--/*@thymesVar id="messages" type="java.util.Collection<String>"*/-->
+        <th:block th:each="message : ${messages}">
+            <li th:utext="${message}"></li>
+        </th:block>
+    </ul>
+</div>

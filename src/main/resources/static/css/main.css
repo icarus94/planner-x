@@ -1,0 +1,197 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.homepage .card {
+    transition: all 0.2s ease;
+    cursor: pointer
+}
+
+.homepage .card:hover {
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    transform: scale(1.03)
+}
+
+.nounderline {
+    text-decoration: none;
+}
+
+.priority-badge {
+    width: 1.5rem;
+}
+
+.task-description {
+    text-align: justify;
+    text-justify: inter-word;
+    display: contents;
+}
+
+.button-add {
+    width: fit-content;
+}
+
+.accordion-header {
+    display: flex;
+}
+
+.accordion-button {
+    width: 100%;
+}
+
+.accordion-button.edit-button {
+    width: 4rem;
+    background: lightsteelblue;
+}
+
+.accordion-button.edit-button:after {
+    background-image: none !important;
+}
+
+.task-button {
+    width: 40px;
+    font-size: 12px;
+}
+
+.task-item .btn.task-button {
+    display: none;
+}
+
+.task-item:hover .btn.task-button {
+    display: inline-block !important;
+}
+
+.text-not-shared {
+    color: darkgray;
+}
+
+/*.accordion-body .button-add {*/
+/*    visibility: hidden;*/
+/*}*/
+
+/*.accordion-body:hover .button-add {*/
+/*    visibility: visible;*/
+/*}*/
+
+
+/*MY TASKS*/
+a[aria-expanded=true] .fa-chevron-right {
+    display: none;
+}
+
+a[aria-expanded=false] .fa-chevron-down {
+    display: none;
+}
+
+a[aria-expanded=true] .fa-expand-alt {
+    display: none;
+}
+
+a[aria-expanded=false] .fa-compress-alt {
+    display: none;
+}
+
+.collapse-expand-all {
+    border: 1px black solid;
+}
+
+.collapse-expand-all:hover {
+    border: 2px black solid;
+}
+
+.collapse-expand-all i {
+    transform: rotate(-45deg);
+}
+
+.no-hover:hover {
+    --bs-table-accent-bg: white !important;
+    color: black;
+}
+
+.task-list-table td {
+    position: relative;
+}
+
+.priority-vertical-bar {
+    position: absolute;
+    width: 5px;
+    height: 60%;
+    border-radius: 0.3rem;
+    left: 0;
+    top: 20%;
+    opacity: .6;
+    transition: opacity .2s;
+}
+
+.priority-high {
+    border-left: red 10px solid;
+}
+
+.priority-low {
+    border-left: green 10px solid;
+}
+
+.priority-medium {
+    border-left: yellow 10px solid;
+}
+
+.first-row-cell {
+    vertical-align: middle;
+}
+
+.first-row-cell .form-check {
+    padding: 0 0 0 28px;
+}
+
+.first-row-cell .form-check-input:checked {
+    background-color: green;
+    border-color: green;
+}
+
+table th.header-indentation {
+    padding-left: 35px;
+}
+
+.action-column {
+    width: 7rem;
+}
+
+.priority-column {
+    width: 8rem;
+}
+
+.duedate-column {
+    width: 10rem;
+}
+
+.add-list-btn {
+    font-size: 16px;
+    height: 38px;
+}
+
+.add-list-btn i {
+    vertical-align: middle;
+}
+
+.btn-light.active {
+    background: lightgray;
+}
+
+#my-tasks {
+    margin-bottom: 100px;
+}
+
+/*MY TASKS*/
+
+
+/*admin*/
+table.dataTable thead .sorting_asc {
+    background-image: none !important;
+}
+
+table.dataTable thead .sorting_desc {
+    background-image: none !important;
+}
+
+.message-container ul {
+    margin: 0;
+}

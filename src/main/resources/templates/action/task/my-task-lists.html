@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout_main}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Task Lists</title>
+</head>
+<body>
+<section layout:fragment="content" style="background-color: #eee;">
+    <div id="my-tasks">
+        <div class="container">
+            <div th:replace="components/tasklist/task-list-filter"></div>
+            <div th:replace="components/tasklist/task-list-table"></div>
+        </div>
+    </div>
+</section>
+<th:block layout:fragment="add-js">
+    <script th:src="@{/js/regular_user.bundle.js}"></script>
+</th:block>
+</body>
+</html>

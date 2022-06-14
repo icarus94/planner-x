@@ -1,0 +1,55 @@
+<!-- Modal -->
+<th:block th:fragment="editTask(task)">
+    <!--/*@thymesVar id="task" type="rs.fon.plannerx.core.task.domain.Task"*/-->
+    <a class="btn btn-light text-warning btn-sm" data-bs-toggle="modal"
+       th:attr="data-bs-target='#edit-task-'+${task.id}"
+       type="button">
+        <i class="fas fa-edit"></i>
+    </a>
+
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" tabindex="-1"
+         th:id="'edit-task-'+${task.id}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" th:text="#{modal.task.title.edit}"></h5>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <!--/*@thymesVar id="addTask" type="rs.fon.planner.domain.dto.task.AddTaskDtoInterface"*/-->
+                    <form method="post" th:action="${@SiteMap.UPDATE_TASK}">
+                        <input hidden name="id" th:value="${task.id}">
+
+                        <div class="form-group">
+                            <label th:text="#{model.task.label.description}"></label>
+                            <textarea class="form-control"
+                                      name="description"
+                                      required th:text="${task.description}" type="text"></textarea>
+                        </div>
+                        <div class="form-group" th:with="dateFormat=#{modal.task.date.format}">
+                            <label th:text="#{model.task.label.dueDate}"></label>
+                            <!--/*@thymesVar id="DateTimeFormat" type="org.springframework.format.annotation.DateTimeFormat"*/-->
+                            <input class="form-control" name="dueDate"
+                                   th:value="${#temporals.format(task.dueDate, dateFormat)}"
+                                   type="datetime-local">
+                        </div>
+                        <div class="form-group">
+                            <label th:text="#{modal.task.label.priority}"></label>
+                            <select class="form-select" name="taskPriority">
+                                <option th:each="priorityOpt : ${T(rs.fon.plannerx.core.task.domain.TaskPriority).values()}"
+                                        th:selected="${task.taskPriority} == ${priorityOpt}" th:text="${priorityOpt}"
+                                        th:value="${priorityOpt}"></option>
+                            </select>
+                        </div>
+                        <div class="mt-4 text-end">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{modal.button.close}"
+                                    type="button"></button>
+                            <button class="btn btn-warning" th:text="#{modal.button.edit}" type="submit">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+

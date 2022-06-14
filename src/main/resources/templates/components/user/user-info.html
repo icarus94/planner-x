@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-header text-center">
+        User Info
+    </div>
+    <!--/*@thymesVar id="user" type="rs.fon.plannerx.core.account.domain.User"*/-->
+    <div class="card-body no-hover">
+        <div class="row">
+            <div class="col-6">
+
+                <div class="mb-3 row">
+                    <label class="col-sm-6 col-form-label" for="username">Username</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" id="username" readonly th:value="${user.getName()}"
+                               type="text">
+                    </div>
+                </div>
+
+
+                <div class="mb-3 row">
+                    <label class="col-sm-6 col-form-label" for="surname">Surname</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" id="surname" readonly th:value="${user.getSurname()}"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-6 col-form-label" for="email">Email</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" id="email" readonly th:value="${user.getEmail()}"
+                               type="text">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6">
+
+                <div class="mb-3 row">
+                    <label class="col-sm-6 col-form-label" for="role">Role</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" id="role" readonly th:value="${user.getRole().getRoleName()}"
+                               type="text">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-6 col-form-label" for="active">Active</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" id="active" readonly th:value="${user.isActive()}"
+                               type="text">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

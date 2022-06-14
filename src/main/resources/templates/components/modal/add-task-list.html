@@ -1,0 +1,29 @@
+<!-- Button trigger modal -->
+<a class="btn btn-light btn-sm border-1 border-dark add-list-btn" data-bs-target="#add-task-list-modal"
+   data-bs-toggle="modal" type="button">
+    <i class="fas fa-plus"> Add List</i>
+</a>
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="add-task-list-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Task List</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" th:action="${@SiteMap.CREATE_TASK_LIST}">
+                    <div class="form-group">
+                        <label>Task list name</label>
+                        <input class="form-control" name="name" required type="text">
+                    </div>
+                    <div class="mt-4 text-end">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-primary" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

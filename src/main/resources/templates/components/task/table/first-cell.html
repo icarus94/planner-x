@@ -1,0 +1,32 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<!--/*@thymesVar id="task" type="rs.fon.plannerx.core.task.domain.Task"*/-->
+<div class="d-flex flex-row" layout:fragment="firstCell(task)">
+    <th:block th:if="${task.done == true}">
+        <div class="bg-success priority-vertical-bar"></div>
+    </th:block>
+    <th:block th:unless="${task.done == true}">
+        <th:block th:switch="${task.getTaskPriority().getPriority()}">
+            <div class="bg-info priority-vertical-bar" th:case="1"></div>
+            <div class="bg-warning priority-vertical-bar" th:case="2"></div>
+            <div class="bg-danger priority-vertical-bar" th:case="3"></div>
+        </th:block>
+    </th:block>
+    <div class="form-check">
+        <th:block th:if="${task.done == true}">
+            <input checked class="form-check-input task-check"
+                   onclick="event.preventDefault();" th:attr="data-id=${task.id}"
+                   th:id="'task-id-'+${task.id}" type="checkbox"
+                   value="">
+        </th:block>
+        <th:block th:unless="${task.done == true}">
+            <input class="form-check-input task-check" onclick="event.preventDefault();"
+                   th:attr="data-id=${task.id}" th:id="'task-id-'+${task.id}"
+                   type="checkbox" value="">
+        </th:block>
+        <label class="form-check-label" th:for="'task-id-'+${task.getId()}">
+        </label>
+    </div>
+    <th:block th:text="${task.getDescription()}"></th:block>
+</div>

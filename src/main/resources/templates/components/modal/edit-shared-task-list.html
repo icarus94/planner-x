@@ -1,0 +1,54 @@
+<th:block th:fragment="editShareTaskList(userTaskList)">
+    <!-- Button trigger modal -->
+    <!--/*@thymesVar id="userTaskList" type="rs.fon.plannerx.core.task.domain.UserTaskList"*/-->
+    <span class="btn btn-warning btn-sm" data-bs-toggle="modal"
+          th:attr="data-bs-target='#edit-shared-task-list-'+${userTaskList.getTaskList().getId()}"
+          type="button">
+        <i class="fas fa-edit"></i>
+    </span>
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
+         tabindex="-1"
+         th:id="'edit-shared-task-list-'+${userTaskList.getTaskList().getId()}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"
+                        th:text="#{modal.task.list.title.edit}"></h5>
+                    <button aria-label="Close" class="btn btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" th:action="${@SiteMap.UPDATE_SHARED_USER_TASK_LIST}">
+                        <div class="form-group">
+                            <input hidden name="userId" th:value="${userTaskList.getTaskList().getId()}">
+                            <input hidden name="taskListId" th:value="${userTaskList.getUser().getId()}">
+                            <label>Permission level</label>
+                            <select class="form-control" name="taskListPermission">
+                                <option th:each="priorityOpt : ${T(rs.fon.plannerx.core.task.domain.TaskListPermission).values()}"
+                                        th:selected="${userTaskList.getPermission()} == ${priorityOpt}"
+                                        th:text="${priorityOpt}"
+                                        th:value="${priorityOpt}"></option>
+                            </select>
+                        </div>
+                        <div class="mt-4 text-end">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{modal.button.close}"
+                                    type="button"></button>
+                            <button class="btn btn-warning" th:text="#{modal.button.edit}" type="submit"></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="mx-auto">
+                        <form method="post" th:action="${@SiteMap.REMOVE_SHARED_USER_TASK_LIST}">
+                            <input hidden name="userId" th:value="${userTaskList.getTaskList().getId()}">
+                            <input hidden name="taskListId" th:value="${userTaskList.getUser().getId()}">
+                            <button class="btn btn-danger" th:text="#{modal.button.task.list.remove}"
+                                    type="submit"></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+

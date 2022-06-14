@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout_main}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Info</title>
+</head>
+<body>
+<section layout:fragment="content" style="background-color: #eee;border-radius: 1em">
+    <div class="container h-100 p-4 mb-5">
+        <div th:replace="components/user/user-info"></div>
+        <div th:replace="components/user/user-report"></div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<!--/*@thymesVar id="userTaskLists" type="java.util.Set"*/-->
+<!--/*@thymesVar id="userTaskList" type="rs.fon.plannerx.core.task.domain.UserTaskList"*/-->
+<!--/*@thymesVar id="taskList" type="rs.fon.plannerx.core.task.domain.TaskList"*/-->
+<table class="table table-hover caption-top mt-5">
+    <caption class="text-center border-5 border-bottom mb-3 position-relative">
+        <div class="col-12">
+            <i class="fas fa-tasks fa-2x"> Task lists</i>
+        </div>
+        <div class="position-absolute top-50 end-0 translate-middle-y">
+            <a aria-expanded="false" class="btn btn-light collapse-expand-all" data-bs-toggle="collapse"
+               id="collapse-expand-all-btn"
+               type="button">
+                <i class="fas fa-expand-alt"></i>
+                <i class="fas fa-compress-alt"></i>
+            </a>
+        </div>
+    </caption>
+    <thead>
+    <tr>
+        <th class="border-0" colspan="2">
+            <div class="col-12 text-center">
+                <th:block th:replace="components/modal/add-task-list"></th:block>
+            </div>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="userTaskList: ${userTaskLists}">
+        <th:block th:with="taskList=${userTaskList.getTaskList()}">
+            <tr>
+                <td>
+                    <a aria-expanded="false"
+                       class="text-reset text-decoration-none task-table-expand-btn"
+                       data-bs-toggle="collapse"
+                       role="button"
+                       th:attr="aria-controls='collapse-list-id-'+${taskList.getId()}"
+                       th:href="'#collapse-list-id-'+${taskList.getId()}">
+                        <i class="fa fa-chevron-right"></i>
+                        <i class="fa fa-chevron-down"></i>
+                        &nbsp;
+                        <th:block th:text="${taskList.getName()}">Task name</th:block>
+                    </a>
+                </td>
+                <td style="width: 12rem;text-align: right;">
+                    <th:block
+                            layout:replace="components/tasklist/table/permissions :: permissions(${userTaskList.isOwner()}, ${userTaskList.getPermission()})"></th:block>
+                    <th:block th:replace="components/modal/edit-task-list :: editTaskList(${taskList})"></th:block>
+                </td>
+            </tr>
+            <tr class="collapse no-hover collapse-list " th:id="'collapse-list-id-'+${taskList.getId()}">
+                <td colspan="2">
+                    <th:block
+                            layout:insert="~{components/task/task-table :: taskTable(${taskList.getTasks()}, ${taskList})}"></th:block>
+                </td>
+            </tr>
+        </th:block>
+    </th:block>
+    </tbody>
+</table>

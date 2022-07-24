@@ -8,6 +8,9 @@ import rs.fon.plannerx.infrastructure.persistence.account.entity.UserJpaEntity;
 public class UserMapper {
 
     public User mapToEntity(UserJpaEntity userJpaEntity) {
+        if (userJpaEntity == null) {
+            return null;
+        }
         return new User(
                 userJpaEntity.getId(),
                 userJpaEntity.isActive(),

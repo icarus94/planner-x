@@ -33,7 +33,7 @@ public class CreateTaskListUseCase implements CreateTaskList {
         // create user task list (aggregate)
         createUserTaskListService.create(
                 new CreateUserTaskListDto(
-                        getUserService.getUserById(createTaskListDto.getUserId()),
+                        getUserService.getById(createTaskListDto.getUserId()),
                         taskList,
                         true,
                         TaskListPermission.ALL

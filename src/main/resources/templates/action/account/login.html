@@ -3,37 +3,40 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login</title>
+    <title th:utext="#{account.login.page.title}"></title>
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="alert alert-danger mx-auto" style="max-width: 700px" th:if="${param.error}"
-         th:text="#{label.login.error}">
+    <div class="alert alert-danger mx-auto" style="max-width: 700px" th:if="${param.error}">
+        <th:block th:switch="${#httpServletRequest.getParameter('error')}">
+            <th:block th:case="not-active" th:text="#{account.login.error.not-active}"></th:block>
+            <th:block th:case="*" th:text="#{account.login.error.general}"></th:block>
+        </th:block>
     </div>
     <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 700px">
-        <div class="card-header" th:text="#{label.login.form.title}"></div>
+        <div class="card-header" th:text="#{account.login.form.title}"></div>
         <div class="card-body">
             <form method="POST" th:action="${@SiteMap.LOGIN}">
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="email" th:text="#{label.login.email}"></label>
+                    <label class="col-sm-2 col-form-label" for="email" th:text="#{account.login.label.email}"></label>
                     <div class="col-sm-10">
                         <input class="form-control" id="email" name="username" type="text">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="inputPassword"
-                           th:text="#{label.login.password}"></label>
+                           th:text="#{account.login.label.password}"></label>
                     <div class="col-sm-10">
                         <input class="form-control" id="inputPassword" name="password" type="password">
                     </div>
                 </div>
                 <div class="row mb-3 col-xs-12 col-md-3 mx-auto">
-                    <button class="btn btn-success" th:text="#{label.login.form.submit}" type="submit"></button>
+                    <button class="btn btn-success" th:text="#{account.login.button.submit}" type="submit"></button>
                 </div>
             </form>
             <div class="row">
                 <a class="btn btn-link mx-auto" th:href="${@SiteMap.REGISTER}"
-                   th:text="#{label.login.link.register}">
+                   th:text="#{account.login.link.register}">
                 </a>
             </div>
         </div>

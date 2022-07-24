@@ -14,7 +14,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"
-                        th:text="#{modal.task.list.title.edit}"></h5>
+                        th:text="#{modal.tasklist.shared.title.edit}"></h5>
                     <button aria-label="Close" class="btn btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
@@ -42,7 +42,7 @@
                         <form method="post" th:action="${@SiteMap.REMOVE_SHARED_USER_TASK_LIST}">
                             <input hidden name="userId" th:value="${userTaskList.getTaskList().getId()}">
                             <input hidden name="taskListId" th:value="${userTaskList.getUser().getId()}">
-                            <button class="btn btn-danger" th:text="#{modal.button.task.list.remove}"
+                            <button class="btn btn-danger" th:text="#{modal.tasklist.shared.button.remove}"
                                     type="submit"></button>
                         </form>
                     </div>

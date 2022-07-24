@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Admin Users</title>
+    <title th:utext="#{admin.users.title}"></title>
 </head>
 <body>
 <section layout:fragment="content" style="background-color: #eee;border-radius: 1em">
@@ -13,11 +13,11 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Surname</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Active</th>
+                    <th scope="col" th:utext="#{admin.users.table.column.name}"></th>
+                    <th scope="col" th:utext="#{admin.users.table.column.surname}"></th>
+                    <th scope="col" th:utext="#{admin.users.table.column.email}"></th>
+                    <th scope="col" th:utext="#{admin.users.table.column.role}"></th>
+                    <th scope="col" th:utext="#{admin.users.table.column.active}"></th>
                     <th scope="col"></th>
                 </tr>
                 </thead>

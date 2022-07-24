@@ -17,6 +17,6 @@ public class TemplateRendererService implements GetInvitationHtml {
     public String get(HtmlContextDto htmlContextDto) {
         Context context = new Context();
         context.setVariable("user", htmlContextDto.getUser());
-        return templateEngine.process("emails/invite", context);
+        return templateEngine.process("emails/invite_template01", context);
     }
 }

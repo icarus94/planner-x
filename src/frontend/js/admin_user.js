@@ -1,3 +1,5 @@
+import 'datatables.net-dt/css/jquery.datatables.css';
+
 $(document).ready(function () {
     var order = {
         sortBy       : 'name',

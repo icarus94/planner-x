@@ -1,7 +1,7 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <div class="card mt-5">
-    <div class="card-header text-center">
-        User Report
-    </div>
+    <div class="card-header text-center" th:utext="#{user.info.label.user_report}"></div>
     <div class="card-body">
         <canvas id="myChart" style="margin-bottom: 50px;height:40vh;"></canvas>
     </div>

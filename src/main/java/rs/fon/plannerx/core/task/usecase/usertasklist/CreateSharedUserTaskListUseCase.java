@@ -29,7 +29,7 @@ public class CreateSharedUserTaskListUseCase implements CreateSharedUserTaskList
         if (!userTaskList.isOwner()) {
             throw new CoreDomainException("Current user doesn't own this task list");
         }
-        User user = this.getUserService.getUserByEmail(createSharedUserTaskListDto.getTargetEmail());
+        User user = this.getUserService.getByEmail(createSharedUserTaskListDto.getTargetEmail());
         if (user == null) {
             throw new CoreDomainException("User with given email does not exist");
         }

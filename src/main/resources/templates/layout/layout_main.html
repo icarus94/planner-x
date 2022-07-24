@@ -14,20 +14,15 @@
     <link layout:fragment="add-css">
 </head>
 <body>
-
-<header sec:authorize="isAuthenticated()" th:replace="components/navbar/default :: header"></header>
+<th:block sec:authorize="isAuthenticated()">
+    <header sec:authorize="hasRole('ROLE_ADMIN')" th:replace="components/navbar/admin :: header"></header>
+    <header sec:authorize="hasRole('ROLE_REGULAR')" th:replace="components/navbar/default :: header"></header>
+</th:block>
 
 <th:block th:replace="components/message/message-dialog"></th:block>
 
-<!--<th:block th:with="currentUser=${#authentication.getPrincipal()}">-->
-<!--    &lt;!&ndash;/*@thymesVar id="currentUser" type="rs.fon.plannerx.infrastructure.web.security.UserPrincipal"*/&ndash;&gt;-->
-<!--    <span th:text ="${currentUser.getName()}"></span>-->
-<!--</th:block>-->
-
 <div class="container py-4 mb-5">
-    <div layout:fragment="content">
-
-    </div>
+    <div layout:fragment="content"></div>
 </div>
 
 <footer th:replace="components/footer/default :: footer"></footer>

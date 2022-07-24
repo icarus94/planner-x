@@ -16,8 +16,8 @@ public class ChangeUserActiveStatusUseCase implements ChangeUserActiveStatus {
 
     @Override
     public void change(UserActiveStatusDto userActiveStatusDto) {
-        User user = this.getUserService.getUserById(userActiveStatusDto.getId());
+        User user = this.getUserService.getById(userActiveStatusDto.getId());
         user.setActive(userActiveStatusDto.isActive());
-        this.updateUserService.updateUser(user);
+        this.updateUserService.update(user);
     }
 }

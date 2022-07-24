@@ -17,15 +17,15 @@ public class EmailContextDto extends SelfValidating<EmailContextDto> {
 
     @NotNull
     @NotBlank
-    String text;
+    String html;
 
     @NotNull
     @NotBlank
     String sendTo;
 
-    public EmailContextDto(String subject, String text, String sendTo) {
+    public EmailContextDto(String subject, String html, String sendTo) {
         this.subject = subject;
-        this.text = text;
+        this.html = html;
         this.sendTo = sendTo;
         this.validateSelf();
     }

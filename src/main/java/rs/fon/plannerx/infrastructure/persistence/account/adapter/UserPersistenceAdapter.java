@@ -25,13 +25,13 @@ public class UserPersistenceAdapter implements GetUser, RegisterUser, UpdateUser
     private final UserMapper userMapper;
 
     @Override
-    public User getUserByEmail(String email) {
+    public User getByEmail(String email) {
         UserJpaEntity userJpaEntity = userSpringDataRepository.findFirstByEmail(email);
         return userMapper.mapToEntity(userJpaEntity);
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getById(int id) {
         UserJpaEntity userJpaEntity = userSpringDataRepository.getById(id);
         return userMapper.mapToEntity(userJpaEntity);
     }
@@ -48,7 +48,7 @@ public class UserPersistenceAdapter implements GetUser, RegisterUser, UpdateUser
     }
 
     @Override
-    public void updateUser(User user) {
+    public void update(User user) {
         UserJpaEntity userJpaEntity = userMapper.mapToJpaEntity(user);
         userSpringDataRepository.save(userJpaEntity);
     }

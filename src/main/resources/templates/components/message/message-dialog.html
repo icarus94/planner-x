@@ -14,8 +14,8 @@
 </svg>
 <!-- FLASH MESSAGES -->
 <div class="container mt-4 message-container" th:if="${flashMessage != null}"
-     th:with="FlashMessageType=${T(rs.fon.plannerx.infrastructure.web.messages.FlashMessageType)}">
-    <!--/*@thymesVar id="flashMessage" type="rs.fon.plannerx.infrastructure.web.messages.FlashMessage"*/-->
+     th:with="FlashMessageType=${T(rs.fon.plannerx.application.web.messages.FlashMessageType)}">
+    <!--/*@thymesVar id="flashMessage" type="rs.fon.plannerx.application.web.messages.FlashMessage"*/-->
     <!--    INFO-->
     <div class="alert alert-primary d-flex align-items-center alert-dismissible" role="alert"
          th:if="${flashMessage.getFlashMessageType().equals(FlashMessageType.INFO)}">

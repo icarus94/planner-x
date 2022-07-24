@@ -13,12 +13,12 @@ public class GetUserUseCase implements GetUser {
     private final rs.fon.plannerx.core.account.ports.out.GetUser getUserService;
 
     @Override
-    public User getUserByEmail(String email) {
-        return getUserService.getUserByEmail(email);
+    public User getByEmail(String email) {
+        return getUserService.getByEmail(email);
     }
 
     @Override
-    public User getUserById(int id) {
-        return getUserService.getUserById(id);
+    public User getById(int id) {
+        return getUserService.getById(id);
     }
 }

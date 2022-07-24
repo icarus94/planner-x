@@ -3,7 +3,7 @@ package rs.fon.plannerx.core.account.ports.out;
 import rs.fon.plannerx.core.account.domain.User;
 
 public interface GetUser {
-    User getUserByEmail(String email);
+    User getByEmail(String email);
 
-    User getUserById(int id);
+    User getById(int id);
 }

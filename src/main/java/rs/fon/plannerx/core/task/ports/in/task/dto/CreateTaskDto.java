@@ -7,6 +7,7 @@ import rs.fon.plannerx.common.SelfValidating;
 import rs.fon.plannerx.core.task.domain.TaskPriority;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -24,11 +25,12 @@ public class CreateTaskDto extends SelfValidating<CreateTaskDto> {
     int taskListId;
 
     @NotNull
-    @NotBlank
+    @NotBlank(message = "task.description")
     String description;
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @FutureOrPresent(message = "task.present_or_future")
     LocalDateTime dueDate;
 
     @NotNull

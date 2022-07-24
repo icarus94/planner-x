@@ -1,7 +1,7 @@
 <header th:with="currentUser=${#authentication.getPrincipal()}">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="${@SiteMap.HOMEPAGE}">MyWebPlanner</a>
+            <a class="navbar-brand" th:href="${@SiteMap.HOMEPAGE}" th:utext="#{navbar.app}"></a>
             <button aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation"
                     class="navbar-toggler"
                     data-bs-target="#navbarText" data-bs-toggle="collapse" type="button">
@@ -10,10 +10,15 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a aria-current="page" class="nav-link" th:href="${@SiteMap.HOMEPAGE}">Home</a>
+                        <a aria-current="page" class="nav-link"
+                           th:href="${@SiteMap.HOMEPAGE}"
+                           th:utext="#{navbar.homepage}"></a>
                     </li>
                     <li class="nav-item">
-                        <a aria-current="page" class="nav-link" th:href="${@SiteMap.MY_TASK_LISTS}">My Tasks</a>
+                        <a aria-current="page" class="nav-link"
+                           th:href="${@SiteMap.MY_TASK_LISTS}"
+                           th:utext="#{navbar.my_tasks}">
+                        </a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-end">
@@ -24,7 +29,8 @@
                         </p>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="${@SiteMap.LOGOUT}">Log out</a>
+                        <a class="nav-link" th:href="${@SiteMap.LOGOUT}"
+                           th:utext="#{navbar.logout}"></a>
                     </li>
                 </ul>
             </div>

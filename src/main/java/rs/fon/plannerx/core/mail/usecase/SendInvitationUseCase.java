@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
 import rs.fon.plannerx.core.account.domain.User;
 import rs.fon.plannerx.core.account.ports.in.GetUser;
+import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.mail.ports.in.SendInvitation;
 import rs.fon.plannerx.core.mail.ports.in.dto.InvitationDto;
 import rs.fon.plannerx.core.mail.ports.out.GetInvitationHtml;
@@ -21,8 +22,13 @@ public class SendInvitationUseCase implements SendInvitation {
 
     @Override
     public void send(InvitationDto invitationDto) {
-        User userInviter = getUserService.getUserById(invitationDto.getUserSenderId());
-        // check if not in DB TODO
+        User targetUser = this.getUserService.getByEmail(invitationDto.getSendingToEmail());
+        if (targetUser != null) {
+            throw new CoreDomainException(CoreDomainException.INVITED_USER_IS_ALREADY_REGISTERED);
+        }
+
+        User userInviter = this.getUserService.getById(invitationDto.getUserSenderId());
+
         String text = this.getInvitationHtmlService.get(new HtmlContextDto(userInviter));
 
         this.sendEmailService.send(new EmailContextDto("Invitation", text, invitationDto.getSendingToEmail()));

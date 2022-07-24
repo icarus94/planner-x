@@ -20,7 +20,7 @@ public class RegisterUserUseCase implements RegisterUser {
     @Override
     public void register(RegisterUserDto registerUserDto) {
         if (registerUserService.isEmailAlreadyUsed(registerUserDto.getEmail())) {
-            throw new CoreDomainException("EMAIL IN USE");        // TODO handle
+            throw new CoreDomainException(CoreDomainException.EMAIL_IS_ALREADY_USED);
         }
         User user = new User();
         user.setActive(true);

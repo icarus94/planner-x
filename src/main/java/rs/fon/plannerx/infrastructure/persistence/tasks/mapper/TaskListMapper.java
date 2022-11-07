@@ -7,7 +7,7 @@ import rs.fon.plannerx.core.task.domain.TaskList;
 import rs.fon.plannerx.infrastructure.persistence.tasks.entity.TaskJpaEntity;
 import rs.fon.plannerx.infrastructure.persistence.tasks.entity.TaskListJpaEntity;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,11 +21,11 @@ public class TaskListMapper {
         TaskList taskList = new TaskList(
                 taskListJpaEntity.getId(),
                 taskListJpaEntity.getName(),
-                new HashSet<>()
+                new LinkedHashSet<>()
         );
         Set<Task> taskSet = taskListJpaEntity.getTasks().stream()
                 .map(task -> taskMapper.mapToEntity(task, taskList))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         taskList.setTasks(taskSet);
 
@@ -37,12 +37,12 @@ public class TaskListMapper {
         TaskListJpaEntity taskListJpaEntity = new TaskListJpaEntity(
                 taskList.getId(),
                 taskList.getName(),
-                new HashSet<>()
+                new LinkedHashSet<>()
         );
 
         Set<TaskJpaEntity> taskJpaEntitySet = taskList.getTasks().stream()
                 .map(task -> taskMapper.mapToJpaEntity(task, taskListJpaEntity))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         taskListJpaEntity.setTasks(taskJpaEntitySet);
         return taskListJpaEntity;
@@ -52,7 +52,7 @@ public class TaskListMapper {
         TaskList taskList = new TaskList(
                 taskListJpaEntity.getId(),
                 taskListJpaEntity.getName(),
-                new HashSet<>()
+                new LinkedHashSet<>()
         );
         Set<Task> taskSet = taskListJpaEntity.getTasks().stream()
                 .map(task -> {
@@ -61,7 +61,7 @@ public class TaskListMapper {
                     }
                     return taskMapper.mapToEntity(task, taskList);
                 })
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         taskList.setTasks(taskSet);
 
@@ -73,7 +73,7 @@ public class TaskListMapper {
         TaskListJpaEntity taskListJpaEntity = new TaskListJpaEntity(
                 taskList.getId(),
                 taskList.getName(),
-                new HashSet<>()
+                new LinkedHashSet<>()
         );
 
         Set<TaskJpaEntity> taskJpaEntitySet = taskList.getTasks().stream()
@@ -83,7 +83,7 @@ public class TaskListMapper {
                     }
                     return taskMapper.mapToJpaEntity(task, taskListJpaEntity);
                 })
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         taskListJpaEntity.setTasks(taskJpaEntitySet);
         return taskListJpaEntity;

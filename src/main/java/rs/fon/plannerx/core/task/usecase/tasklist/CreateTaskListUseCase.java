@@ -3,7 +3,6 @@ package rs.fon.plannerx.core.task.usecase.tasklist;
 import lombok.RequiredArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
 import rs.fon.plannerx.core.account.ports.in.GetUser;
-import rs.fon.plannerx.core.task.domain.Task;
 import rs.fon.plannerx.core.task.domain.TaskList;
 import rs.fon.plannerx.core.task.domain.TaskListPermission;
 import rs.fon.plannerx.core.task.ports.in.tasklist.CreateTaskList;
@@ -12,7 +11,7 @@ import rs.fon.plannerx.core.task.ports.in.usertasklist.CreateUserTaskList;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.dto.CreateUserTaskListDto;
 import rs.fon.plannerx.core.task.ports.out.tasklist.SaveTaskList;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 @UseCase
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class CreateTaskListUseCase implements CreateTaskList {
         // create task list
         TaskList taskList = new TaskList();
         taskList.setName(createTaskListDto.getName());
-        taskList.setTasks(new HashSet<Task>());
+        taskList.setTasks(new LinkedHashSet<>());
         taskList = saveTaskListService.saveAndReturn(taskList);
 
         // create user task list (aggregate)

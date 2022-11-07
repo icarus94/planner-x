@@ -1,17 +1,31 @@
 version: '3.3'
 services:
-  #  mysqldb:
-  #    container_name: mysql-service
-  #    image: 'mysql/mysql-server:5.7'
-  #    volumes:
-  #      - ./dbdata:/var/lib/mysql
-  #    environment:
-  #      MYSQL_DATABASE: plannerx
-  #      MYSQL_ROOT_PASSWORD: root
-  #      MYSQL_ROOT_HOST: '%'
-  #    ports:
-  #      - '3303:3303'
-  #    restart: always
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: plannerx
+    ports:
+      - "3399:3306"
+    networks:
+      mynet:
+        aliases:
+          - mysql.docker
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8099:80"
+    networks:
+      mynet:
+        aliases:
+          - phpmyadmin.docker
   api:
     build:
       context: ./
@@ -20,8 +34,17 @@ services:
       - ./:/app
       - ./.m2:/root/.m2
     working_dir: /app
+    depends_on:
+      - db
+    networks:
+      mynet:
+        aliases:
+          - plannerx.docker
     command: sh docker/run.sh
     ports:
       - 8085:8085
       - 35729:35729
       - 5005:5005
+networks:
+  mynet:
+    driver: bridge

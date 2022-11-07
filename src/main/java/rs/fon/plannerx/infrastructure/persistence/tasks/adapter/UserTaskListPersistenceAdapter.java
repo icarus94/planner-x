@@ -13,7 +13,7 @@ import rs.fon.plannerx.infrastructure.persistence.tasks.mapper.UserTaskListMappe
 import rs.fon.plannerx.infrastructure.persistence.tasks.repository.UserTaskListSpringDataRepository;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,7 +42,7 @@ public class UserTaskListPersistenceAdapter implements GetUserTaskLists, SaveUse
         userTaskListJpaEntities = userTaskListJpaEntities.stream()
                 .map(userTaskListJpaEntity -> {
                     userTaskListJpaEntity.getTaskList().setTasks(
-                            new HashSet<>(
+                            new LinkedHashSet<>(
                                     this.taskPersistenceAdapter.getByFilter(
                                             userTaskListFilterDto,
                                             userTaskListJpaEntity.getTaskList().getId()

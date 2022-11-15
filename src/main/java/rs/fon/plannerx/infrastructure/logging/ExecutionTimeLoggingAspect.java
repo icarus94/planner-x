@@ -1,4 +1,4 @@
-package rs.fon.plannerx.infrastructure.aspect;
+package rs.fon.plannerx.infrastructure.logging;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

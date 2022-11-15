@@ -2,11 +2,13 @@ package rs.fon.plannerx.core.task.usecase.task;
 
 import lombok.AllArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
+import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.task.domain.Task;
 import rs.fon.plannerx.core.task.ports.in.task.CreateTask;
 import rs.fon.plannerx.core.task.ports.in.task.dto.CreateTaskDto;
 import rs.fon.plannerx.core.task.ports.out.task.SaveTask;
 import rs.fon.plannerx.core.task.ports.out.tasklist.GetTaskList;
+import rs.fon.plannerx.core.task.service.TaskListPermissionCheckInterface;
 
 import java.time.LocalDateTime;
 
@@ -15,10 +17,14 @@ import java.time.LocalDateTime;
 public class CreateTaskUseCase implements CreateTask {
     private final SaveTask saveTaskService;
     private final GetTaskList getTaskListService;
+    private final TaskListPermissionCheckInterface taskListPermissionCheckService;
+
 
     @Override
     public void create(CreateTaskDto createTaskDto) {
-        // TODO PERMISSION CHECK
+        if (!taskListPermissionCheckService.isUpdateAllowed(createTaskDto.getUserId(), createTaskDto.getTaskListId())) {
+            throw new CoreDomainException("Update not allowed!");
+        }
 
         Task task = new Task();
         task.setTaskList(getTaskListService.get(createTaskDto.getTaskListId()));

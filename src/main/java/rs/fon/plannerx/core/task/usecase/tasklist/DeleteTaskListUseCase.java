@@ -3,34 +3,34 @@ package rs.fon.plannerx.core.task.usecase.tasklist;
 import lombok.RequiredArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
 import rs.fon.plannerx.core.exception.CoreDomainException;
-import rs.fon.plannerx.core.task.domain.TaskListPermission;
 import rs.fon.plannerx.core.task.domain.UserTaskList;
 import rs.fon.plannerx.core.task.ports.in.tasklist.DeleteTaskList;
 import rs.fon.plannerx.core.task.ports.in.tasklist.dto.DeleteTaskListDto;
-import rs.fon.plannerx.core.task.ports.out.usertasklist.GetUserTaskList;
+import rs.fon.plannerx.core.task.ports.out.usertasklist.DeleteUserTaskList;
+import rs.fon.plannerx.core.task.ports.out.usertasklist.GetUserTaskLists;
+import rs.fon.plannerx.core.task.service.TaskListPermissionCheckInterface;
+
+import java.util.Collection;
 
 @UseCase
 @RequiredArgsConstructor
 public class DeleteTaskListUseCase implements DeleteTaskList {
-    //    private final DoesTaskListExist doesTaskListExistService;
-    private final GetUserTaskList getUserTaskListService;
+
+    private final GetUserTaskLists getUserTaskListsService;
+    private final DeleteUserTaskList deleteUserTaskListService;
+    private final TaskListPermissionCheckInterface taskListPermissionCheckService;
 
     @Override
     public void delete(DeleteTaskListDto deleteTaskListDto) {
-//        if (!doesTaskListExistService.check(deleteTaskListDto.getTaskListId())) {
-//            throw new CoreDomainException("Task list doesn't exist");
-//        }
-        // TODO PERMISSION CHECK
-        UserTaskList userTaskList = getUserTaskListService.get(
-                deleteTaskListDto.getUserId(),
-                deleteTaskListDto.getTaskListId()
-        );
-        if (userTaskList.getPermission() != TaskListPermission.ALL) {
+
+        if (!taskListPermissionCheckService.isDeleteAllowed(deleteTaskListDto.getUserId(), deleteTaskListDto.getTaskListId())) {
             throw new CoreDomainException("You don't have task list permission");
         }
 
-        // remove all usertasklist
+        Collection<UserTaskList> userTaskListCollection = getUserTaskListsService.getUserTaskListsByTaskListId(deleteTaskListDto.getTaskListId());
 
-        // remove tasklist  & all tasks
+        for (UserTaskList userTaskList : userTaskListCollection) {
+            deleteUserTaskListService.remove(userTaskList);
+        }
     }
 }

@@ -195,3 +195,7 @@ table.dataTable thead .sorting_desc {
 .message-container ul {
     margin: 0;
 }
+
+.modal-dialog .modal-dialog {
+    text-align: left;
+}

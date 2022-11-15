@@ -23,10 +23,18 @@ public class UpdateUserUseCase implements UpdateUser {
     @Override
     public void update(UpdateUserDto updateUserDto) {
         User user = this.getUserService.getById(updateUserDto.getId());
-        if (!this.passwordEncoder.matches(updateUserDto.getPassword(), user.getPassword())) {
-            throw new CoreDomainException(CoreDomainException.PASSWORD_DOES_NOT_MATCH);
+        if (updateUserDto.getPassword().length() > 0) {
+            if (!this.passwordEncoder.matches(updateUserDto.getPassword(), user.getPassword())) {
+                throw new CoreDomainException(CoreDomainException.PASSWORD_DOES_NOT_MATCH);
+            }
+            if (updateUserDto.getNewPassword().length() == 0) {
+                throw new CoreDomainException(CoreDomainException.NEW_PASSWORD_IS_BLANK);
+            }
+            if (!updateUserDto.getNewPassword().equals(updateUserDto.getRetypedPassword())) {
+                throw new CoreDomainException(CoreDomainException.NEW_PASSWORDS_DO_NOT_MATCH);
+            }
+            user.setPassword(this.passwordEncoder.encode(updateUserDto.getNewPassword()));
         }
-        user.setPassword(this.passwordEncoder.encode(updateUserDto.getPassword()));
         user.setName(updateUserDto.getName());
         user.setSurname(updateUserDto.getSurname());
         this.updateUserService.update(user);

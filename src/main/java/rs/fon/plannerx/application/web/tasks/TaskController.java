@@ -112,13 +112,13 @@ public class TaskController {
         );
         redirectAttributes.addFlashAttribute(
                 Message.PLACEHOLDER,
-                this.flashMessageFactory.successFlashMessage(Message.TASK_UPDATED)
+                this.flashMessageFactory.successFlashMessage(Message.TASK_DELETED)
         );
         return new RedirectView(SiteMap.MY_TASK_LISTS);
     }
 
     @ResponseBody
-    @PostMapping(value = SiteMap.CHECK_TASK, produces = "application/json")
+    @PostMapping(value = SiteMap.CHECK_TASK)
     public ResponseEntity<Object> checkTask(
             @CurrentUser UserPrincipal userPrincipal,
             @RequestParam(name = "id") int taskId,

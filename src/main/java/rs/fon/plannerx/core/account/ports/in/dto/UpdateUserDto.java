@@ -26,15 +26,12 @@ public class UpdateUserDto extends SelfValidating<UpdateUserDto> {
     String surname;
 
     @NotNull
-    @NotBlank
     String password;
 
     @NotNull
-    @NotBlank
     String newPassword;
 
     @NotNull
-    @NotBlank
     String retypedPassword;
 
     public UpdateUserDto(int id, String name, String surname, String password, String newPassword, String retypedPassword) {

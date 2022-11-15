@@ -1,4 +1,6 @@
 import 'datatables.net-dt/css/jquery.datatables.css';
+import 'datatables.net';
+import 'datatables.net-dt';
 
 $(document).ready(function () {
     var order = {

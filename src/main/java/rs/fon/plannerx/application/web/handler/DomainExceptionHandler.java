@@ -24,6 +24,12 @@ public class DomainExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(CoreDomainException.class)
     public String domainErrorHandler(HttpServletRequest req, Exception e, RedirectAttributes redirectAttributes) {
         this.logger.error("CoreDomainException Handler ACTIVATED");
+
+        if (("XMLHttpRequest").equals(req.getHeader("X-Requested-With"))) {
+            System.out.println("eo ovdde smo");
+            req.setAttribute("error", e.getMessage());
+            return "forward:/error-json";
+        }
         redirectAttributes.addFlashAttribute(
                 Message.PLACEHOLDER,
                 flashMessageFactory.dangerFlashMessage(e.getMessage())

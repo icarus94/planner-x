@@ -45,7 +45,8 @@ public class Security extends WebSecurityConfigurerAdapter {
                         "/js/**",
                         "/css/**",
                         "/img/**",
-                        "/webjars/**"
+                        "/webjars/**",
+                        "/common/**"
                 )
                 .permitAll()
                 .and()
@@ -56,7 +57,6 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage(SiteMap.LOGIN)
                 .successHandler(new CustomAuthenticationSuccessHandler())
-                .failureUrl(SiteMap.LOGIN_FAILED)
                 .failureHandler(new CustomAuthenticationFailureHandler())
                 .permitAll()
                 .and()

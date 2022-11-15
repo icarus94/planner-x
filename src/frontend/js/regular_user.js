@@ -13,7 +13,9 @@ $(document).ready(function () {
         $.ajax({
             method: "POST",
             url   : "/task/check-task",
-            data  : {id: id, done: isDone}
+            data  : {id: id, done: isDone},
+            // dataType   : "json",
+            // contentType: " application/json"
         }).done(function (html) {
             if (isDone) {
                 $(checkboxElement).prop('checked', true);

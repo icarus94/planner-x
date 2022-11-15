@@ -73,6 +73,14 @@ public class UserTaskListPersistenceAdapter implements GetUserTaskLists, SaveUse
     }
 
     @Override
+    public Collection<UserTaskList> getUserTaskListsByTaskListId(int taskListId) {
+        return userTaskListSpringDataRepository.getUserTaskListJpaEntitiesByTaskList_Id(taskListId)
+                .stream()
+                .map(userTaskListMapper::mapToEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void save(UserTaskList userTaskList) {
         userTaskListSpringDataRepository.save(userTaskListMapper.mapToJpaEntity(userTaskList));
     }

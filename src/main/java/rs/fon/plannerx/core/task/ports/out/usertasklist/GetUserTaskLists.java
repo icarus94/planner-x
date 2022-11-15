@@ -14,4 +14,6 @@ public interface GetUserTaskLists {
     Collection<UserTaskList> getUserTaskListsWithOwnership(int userId);
 
     Set<UserTaskList> getUserTaskListsWithoutOwnership(int taskListId);
+
+    Collection<UserTaskList> getUserTaskListsByTaskListId(int taskListId);
 }

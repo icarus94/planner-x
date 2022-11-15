@@ -13,6 +13,7 @@ import java.io.IOException;
 public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+        setDefaultFailureUrl(SiteMap.LOGIN_FAILED);
         if (exception.getClass().isAssignableFrom(DisabledException.class)) {
             setDefaultFailureUrl(SiteMap.LOGIN_FAILED_ACCOUNT_NOT_ACTIVE);
         }

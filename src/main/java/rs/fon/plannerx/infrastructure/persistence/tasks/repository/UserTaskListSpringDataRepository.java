@@ -37,4 +37,6 @@ public interface UserTaskListSpringDataRepository extends JpaRepository<UserTask
 
     @Query("FROM UserTaskListJpaEntity WHERE taskList.id = ?1 AND owner = false")
     Collection<UserTaskListJpaEntity> getUserTaskListsWithoutOwnership(int taskListId);
+
+    Collection<UserTaskListJpaEntity> getUserTaskListJpaEntitiesByTaskList_Id(int taskListId);
 }

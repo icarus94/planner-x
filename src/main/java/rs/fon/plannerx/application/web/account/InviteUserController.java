@@ -23,7 +23,7 @@ import javax.validation.constraints.Email;
 @Controller
 @AllArgsConstructor
 @AnyAuthenticationPermission
-public class UserInviteController {
+public class InviteUserController {
 
     private final SendInvitation sendInvitationUseCase;
 
@@ -39,7 +39,12 @@ public class UserInviteController {
             @Email @RequestParam("invite_email") String email,
             RedirectAttributes redirectAttributes
     ) {
-        sendInvitationUseCase.send(new InvitationDto(userPrincipal.getId(), email));
+        sendInvitationUseCase.send(
+                new InvitationDto(
+                        userPrincipal.getId(),
+                        email
+                )
+        );
         redirectAttributes.addFlashAttribute(
                 Message.PLACEHOLDER,
                 flashMessageFactory.successFlashMessage(Message.USER_INVITED)

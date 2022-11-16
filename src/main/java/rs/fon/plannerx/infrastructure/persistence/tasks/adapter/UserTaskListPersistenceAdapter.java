@@ -31,7 +31,7 @@ public class UserTaskListPersistenceAdapter implements GetUserTaskLists, SaveUse
     public Set<UserTaskList> getUserTaskLists(int userId) {
         return userTaskListSpringDataRepository.getAllByUserIdOrderByTaskListAsc(userId).stream()
                 .map(userTaskListMapper::mapToEntity)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class UserTaskListPersistenceAdapter implements GetUserTaskLists, SaveUse
         return userTaskListSpringDataRepository.getUserTaskListsWithoutOwnership(taskListId)
                 .stream()
                 .map(userTaskListMapper::mapToEntity)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     @Override

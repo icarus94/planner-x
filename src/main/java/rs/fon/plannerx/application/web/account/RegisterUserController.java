@@ -19,7 +19,7 @@ import java.io.IOException;
 @WebAdapter
 @Controller
 @AllArgsConstructor
-public class RegisterController {
+public class RegisterUserController {
 
     private final RegisterUser registerUserUseCase;
 

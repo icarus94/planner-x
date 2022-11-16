@@ -23,7 +23,7 @@ import rs.fon.plannerx.core.account.ports.in.dto.UpdateUserDto;
 @Controller
 @RequiredArgsConstructor
 @RegularUserPermission
-public class UserController {
+public class UpdateUserController {
 
     private final GetUser getUserService;
 

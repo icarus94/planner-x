@@ -7,19 +7,23 @@ import rs.fon.plannerx.core.account.domain.User;
 import rs.fon.plannerx.core.account.domain.UserRole;
 import rs.fon.plannerx.core.account.ports.in.RegisterUser;
 import rs.fon.plannerx.core.account.ports.in.dto.RegisterUserDto;
+import rs.fon.plannerx.core.account.ports.out.DoesUserExist;
+import rs.fon.plannerx.core.account.ports.out.SaveUser;
 import rs.fon.plannerx.core.exception.CoreDomainException;
 
 @UseCase
 @RequiredArgsConstructor
 public class RegisterUserUseCase implements RegisterUser {
 
-    private final rs.fon.plannerx.core.account.ports.out.RegisterUser registerUserService;
+    private final SaveUser saveUserService;
+
+    private final DoesUserExist doesUserExistService;
 
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public void register(RegisterUserDto registerUserDto) {
-        if (registerUserService.isEmailAlreadyUsed(registerUserDto.getEmail())) {
+        if (this.doesUserExistService.doesExistByEmail(registerUserDto.getEmail())) {
             throw new CoreDomainException(CoreDomainException.EMAIL_IS_ALREADY_USED);
         }
         User user = new User();
@@ -29,6 +33,6 @@ public class RegisterUserUseCase implements RegisterUser {
         user.setPassword(passwordEncoder.encode(registerUserDto.getPassword()));
         user.setEmail(registerUserDto.getEmail());
         user.setRole(UserRole.ROLE_REGULAR);
-        this.registerUserService.register(user);
+        this.saveUserService.save(user);
     }
 }

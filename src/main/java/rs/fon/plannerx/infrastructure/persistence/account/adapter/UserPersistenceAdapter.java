@@ -6,20 +6,18 @@ import org.springframework.data.domain.Sort;
 import rs.fon.plannerx.common.PersistenceAdapter;
 import rs.fon.plannerx.core.account.domain.User;
 import rs.fon.plannerx.core.account.domain.UserRole;
-import rs.fon.plannerx.core.account.ports.out.GetUser;
-import rs.fon.plannerx.core.account.ports.out.GetUsers;
-import rs.fon.plannerx.core.account.ports.out.RegisterUser;
-import rs.fon.plannerx.core.account.ports.out.UpdateUser;
+import rs.fon.plannerx.core.account.ports.out.*;
 import rs.fon.plannerx.infrastructure.persistence.account.entity.UserJpaEntity;
 import rs.fon.plannerx.infrastructure.persistence.account.mapper.UserMapper;
 import rs.fon.plannerx.infrastructure.persistence.account.repository.UserSpringDataRepository;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @PersistenceAdapter
-public class UserPersistenceAdapter implements GetUser, RegisterUser, UpdateUser, GetUsers {
+public class UserPersistenceAdapter implements GetUser, SaveUser, UpdateUser, GetUsers, DoesUserExist {
 
     private final UserSpringDataRepository userSpringDataRepository;
     private final UserMapper userMapper;
@@ -37,14 +35,9 @@ public class UserPersistenceAdapter implements GetUser, RegisterUser, UpdateUser
     }
 
     @Override
-    public void register(User user) {
+    public void save(User user) {
         UserJpaEntity userJpaEntity = userMapper.mapToJpaEntity(user);
         userSpringDataRepository.save(userJpaEntity);
-    }
-
-    @Override
-    public boolean isEmailAlreadyUsed(String email) {
-        return userSpringDataRepository.existsByEmail(email);
     }
 
     @Override
@@ -62,12 +55,17 @@ public class UserPersistenceAdapter implements GetUser, RegisterUser, UpdateUser
         PageRequest pageable = PageRequest.of(page, pageSize, sort);
         return userSpringDataRepository.findAllWithRegularRole(pageable).stream()
                 .map(userMapper::mapToEntity)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     @Override
 
     public int getRegularUsersCount() {
         return userSpringDataRepository.countAllByRole(UserRole.ROLE_REGULAR);
+    }
+
+    @Override
+    public boolean doesExistByEmail(String email) {
+        return userSpringDataRepository.existsByEmail(email);
     }
 }

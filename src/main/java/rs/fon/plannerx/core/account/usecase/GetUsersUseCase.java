@@ -10,13 +10,13 @@ import java.util.Set;
 
 @UseCase
 @AllArgsConstructor
-public class GetUsersPaginatedUseCase implements GetUsers {
+public class GetUsersUseCase implements GetUsers {
 
     private final rs.fon.plannerx.core.account.ports.out.GetUsers getUsersService;
 
     @Override
     public Set<User> getPaginated(PaginationDto paginationDto) {
-        return getUsersService.getRegularUsersAsPagination(
+        return getUsersService.getRegularUsers(
                 paginationDto.getPage(),
                 paginationDto.getPageSize(),
                 paginationDto.getSortBy(),

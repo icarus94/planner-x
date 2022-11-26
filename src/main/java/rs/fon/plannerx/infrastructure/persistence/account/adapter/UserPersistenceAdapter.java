@@ -47,7 +47,7 @@ public class UserPersistenceAdapter implements GetUser, SaveUser, UpdateUser, Ge
     }
 
     @Override
-    public Set<User> getRegularUsersAsPagination(int page, int pageSize, String sortBy, String sortDirection) {
+    public Set<User> getRegularUsers(int page, int pageSize, String sortBy, String sortDirection) {
         Sort sort = Sort.by(sortBy).ascending();
         if (sortDirection.equals("desc")) {
             sort = Sort.by(sortBy).descending();

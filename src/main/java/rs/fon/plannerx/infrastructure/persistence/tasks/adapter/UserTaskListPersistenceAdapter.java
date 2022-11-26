@@ -93,7 +93,7 @@ public class UserTaskListPersistenceAdapter implements GetUserTaskLists, SaveUse
     }
 
     @Override
-    public void remove(UserTaskList userTaskList) {
+    public void delete(UserTaskList userTaskList) {
         this.userTaskListSpringDataRepository.delete(
                 this.userTaskListMapper.mapToJpaEntity(
                         userTaskList

@@ -29,6 +29,6 @@ public class RemoveSharedUserTaskListUseCase implements RemoveSharedUserTaskList
                 removeUserFromSharedTaskListDto.getTargetUserId(),
                 removeUserFromSharedTaskListDto.getTargetTaskListId()
         );
-        deleteUserTaskListService.remove(userTaskList);
+        deleteUserTaskListService.delete(userTaskList);
     }
 }

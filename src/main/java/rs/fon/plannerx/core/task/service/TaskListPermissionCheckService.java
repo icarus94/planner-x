@@ -1,14 +1,14 @@
 package rs.fon.plannerx.core.task.service;
 
 import lombok.AllArgsConstructor;
-import rs.fon.plannerx.common.MyService;
+import rs.fon.plannerx.common.DomainService;
 import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.task.domain.TaskListPermission;
 import rs.fon.plannerx.core.task.domain.UserTaskList;
 import rs.fon.plannerx.core.task.ports.out.usertasklist.GetUserTaskList;
 
 
-@MyService
+@DomainService
 @AllArgsConstructor
 public class TaskListPermissionCheckService implements TaskListPermissionCheckInterface {
 

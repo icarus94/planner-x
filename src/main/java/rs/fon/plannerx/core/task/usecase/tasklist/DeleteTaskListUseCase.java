@@ -30,7 +30,7 @@ public class DeleteTaskListUseCase implements DeleteTaskList {
         Collection<UserTaskList> userTaskListCollection = getUserTaskListsService.getUserTaskListsByTaskListId(deleteTaskListDto.getTaskListId());
 
         for (UserTaskList userTaskList : userTaskListCollection) {
-            deleteUserTaskListService.remove(userTaskList);
+            deleteUserTaskListService.delete(userTaskList);
         }
     }
 }

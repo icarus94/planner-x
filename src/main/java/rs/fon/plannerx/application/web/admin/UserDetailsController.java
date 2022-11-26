@@ -9,7 +9,8 @@ import rs.fon.plannerx.application.web.permission.AdminPermission;
 import rs.fon.plannerx.application.web.sitemap.SiteMap;
 import rs.fon.plannerx.common.WebAdapter;
 import rs.fon.plannerx.core.account.ports.in.GetUser;
-import rs.fon.plannerx.core.report.ports.out.GetUserAllTaskListReport;
+import rs.fon.plannerx.core.report.ports.in.GetUserReport;
+import rs.fon.plannerx.core.report.ports.in.dto.UserDto;
 
 @WebAdapter
 @Controller
@@ -18,7 +19,7 @@ import rs.fon.plannerx.core.report.ports.out.GetUserAllTaskListReport;
 public class UserDetailsController {
 
     private final GetUser getUserService;
-    private final GetUserAllTaskListReport getUserAllTaskListReportService;
+    private final GetUserReport getUserReportService;
 
     @GetMapping(SiteMap.ADMIN_USERS_USER_INFO)
     public void userInfo(
@@ -26,6 +27,8 @@ public class UserDetailsController {
             Model model
     ) {
         model.addAttribute("user", this.getUserService.getById(userId));
-        model.addAttribute("userTaskListReport", this.getUserAllTaskListReportService.get(userId));
+        model.addAttribute("userTaskListReport", this.getUserReportService.getAllTaskListsReport(
+                new UserDto(userId)
+        ));
     }
 }

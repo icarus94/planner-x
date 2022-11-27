@@ -11,7 +11,7 @@ import rs.fon.plannerx.application.web.permission.AdminPermission;
 import rs.fon.plannerx.application.web.sitemap.SiteMap;
 import rs.fon.plannerx.common.WebAdapter;
 import rs.fon.plannerx.core.account.domain.User;
-import rs.fon.plannerx.core.account.ports.in.GetUsers;
+import rs.fon.plannerx.core.account.ports.in.GetUsersWithRegularRole;
 import rs.fon.plannerx.core.account.ports.in.dto.PaginationDto;
 
 import java.util.HashMap;
@@ -24,7 +24,7 @@ import java.util.Set;
 @AdminPermission
 public class UsersController {
 
-    private final GetUsers getUsersAsPaginationService;
+    private final GetUsersWithRegularRole getUsersWithRegularRoleService;
 
     @GetMapping(SiteMap.ADMIN_USERS)
     public void getPage() {
@@ -41,7 +41,7 @@ public class UsersController {
     ) {
         Map<String, Object> result = new HashMap<>();
 
-        Set<User> users = getUsersAsPaginationService.getPaginated(
+        Set<User> users = getUsersWithRegularRoleService.getPaginated(
                 new PaginationDto(
                         start / length,
                         length,
@@ -51,8 +51,8 @@ public class UsersController {
         );
         result.put("data", users);
         result.put("draw", draw);
-        result.put("recordsTotal", getUsersAsPaginationService.getTotalCount());
-        result.put("recordsFiltered", getUsersAsPaginationService.getTotalCount());
+        result.put("recordsTotal", getUsersWithRegularRoleService.getTotalCount());
+        result.put("recordsFiltered", getUsersWithRegularRoleService.getTotalCount());
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

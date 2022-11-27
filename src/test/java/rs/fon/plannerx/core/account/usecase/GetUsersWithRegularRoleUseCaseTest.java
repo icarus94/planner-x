@@ -13,7 +13,7 @@ import java.util.Set;
 
 import static org.mockito.BDDMockito.*;
 
-public class GetUsersUseCaseTest {
+public class GetUsersWithRegularRoleUseCaseTest {
     private GetUsers getUsersService;
 
     @BeforeEach
@@ -26,7 +26,7 @@ public class GetUsersUseCaseTest {
 
         given(getUsersService.getRegularUsersCount()).willReturn(20);
 
-        GetUsersUseCase getUsersUseCase = new GetUsersUseCase(getUsersService);
+        GetUsersWithRegularRoleUseCase getUsersUseCase = new GetUsersWithRegularRoleUseCase(getUsersService);
         // act
         int result = getUsersUseCase.getTotalCount();
 
@@ -47,7 +47,7 @@ public class GetUsersUseCaseTest {
                 eq(paginationDto.getSortDirection())
         )).willReturn(usersMock);
 
-        GetUsersUseCase getUsersUseCase = new GetUsersUseCase(getUsersService);
+        GetUsersWithRegularRoleUseCase getUsersUseCase = new GetUsersWithRegularRoleUseCase(getUsersService);
         // act
         Set<User> result = getUsersUseCase.getPaginated(paginationDto);
 

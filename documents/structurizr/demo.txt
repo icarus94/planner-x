@@ -1,0 +1,75 @@
+workspace {
+
+    model {
+        user = person "Admin"
+        user2 = person "Regular User"
+        softwareSystem = softwareSystem "Software System" {
+            webapp = container "Web Application" {
+                user -> this "Uses"
+                user2 -> this "Uses"
+                webAdapters = component "Web Adapters" "Controllers that handle HTTP requests" {
+
+                }
+
+                domain = group "Domain" {
+
+                    portsIn = component "Input Ports" {
+                        webAdapters -> this  "Uses"
+                    }
+                    portsOut = component "Output Ports" {
+
+                    }
+
+                    useCases = component "Use Cases" "Business logic"{
+                        portsIn -> this "Implements"
+                        this -> portsOut "Uses"
+                    }
+                    domainModels = component "Domain Models" {
+                        useCases -> this "Manages"
+                    }
+
+
+                }
+                persistenceAdapters = component "Persistance Adapters" "Handles persistance operations"{
+                    portsOut -> this "Implements"
+                }
+
+                emailNotification = component "Email Sender" "Service for email sending"{
+                    portsOut -> this "Implements"
+                }
+            }
+            db = container "Database" "MySql Database"{
+                webapp -> this "Reads from and writes to"
+            }
+
+            phpmyadmin = container "PhpMyAdmin Application" "UI for database"{
+                this -> db "Uses"
+            }
+        }
+    }
+
+    views {
+        systemContext softwareSystem {
+            include *
+            autolayout lr
+        }
+
+        container softwareSystem {
+            include phpmyadmin
+            include db
+            include webapp
+            autolayout lr
+        }
+
+        component webapp {
+            include *
+
+
+        }
+
+
+
+        theme default
+    }
+
+}

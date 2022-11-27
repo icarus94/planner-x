@@ -1,14 +1,22 @@
 # PlannerX (ToDo App - My WebPlanner)
 
-### Description
+# Table of Contents
+
+1. [Description](#description)
+2. [Requirements](#requirements)
+3. [Install & Run](#install--run)
+4. [System design](#system-design)
+5. [How to use](#how-to-use)
+
+## Description
 
 Small application for managing personal tasks and task lists.
 
-### Requirements
+## Requirements
 
 * Docker [(install here)](https://docs.docker.com/get-docker/)
 
-### Install & Run
+## Install & Run
 
 This command will install and run this application:
 
@@ -49,7 +57,7 @@ Docker components - for dev
 
 </details>
 
-### How to use
+## How to use
 
 Application will be accessible via docker on:
 

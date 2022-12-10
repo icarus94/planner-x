@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
 import rs.fon.plannerx.core.account.domain.User;
 import rs.fon.plannerx.core.account.ports.out.GetUser;
-import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.task.domain.UserTaskList;
+import rs.fon.plannerx.core.task.exception.TaskException;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.CreateSharedUserTaskList;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.dto.CreateSharedUserTaskListDto;
 import rs.fon.plannerx.core.task.ports.out.usertasklist.GetUserTaskList;
@@ -27,11 +27,11 @@ public class CreateSharedUserTaskListUseCase implements CreateSharedUserTaskList
                 createSharedUserTaskListDto.getTargetTaskListId()
         );
         if (!userTaskList.isOwner()) {
-            throw new CoreDomainException("Current user doesn't own this task list");
+            throw TaskException.operationNotAllowed();
         }
         User user = this.getUserService.getByEmail(createSharedUserTaskListDto.getTargetEmail());
         if (user == null) {
-            throw new CoreDomainException("User with given email does not exist");
+            throw TaskException.userNotFoundByEmail();
         }
         UserTaskList sharedUserTaskList = new UserTaskList();
         sharedUserTaskList.setUser(user);

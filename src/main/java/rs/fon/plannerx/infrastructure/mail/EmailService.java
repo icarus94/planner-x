@@ -5,8 +5,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import rs.fon.plannerx.core.mail.ports.out.SendEmail;
-import rs.fon.plannerx.core.mail.ports.out.dto.EmailContextDto;
+import rs.fon.plannerx.core.account.ports.out.SendEmail;
+import rs.fon.plannerx.core.account.ports.out.dto.EmailContextDto;
 
 import javax.mail.MessagingException;
 

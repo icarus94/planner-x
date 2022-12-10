@@ -2,8 +2,8 @@ package rs.fon.plannerx.core.task.usecase.task;
 
 import lombok.AllArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
-import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.task.domain.Task;
+import rs.fon.plannerx.core.task.exception.TaskException;
 import rs.fon.plannerx.core.task.ports.in.task.UpdateTask;
 import rs.fon.plannerx.core.task.ports.in.task.dto.UpdateTaskDto;
 import rs.fon.plannerx.core.task.ports.out.task.GetTask;
@@ -23,7 +23,7 @@ public class UpdateTaskUseCase implements UpdateTask {
         Task task = this.getTaskService.get(updateTaskDto.getTaskId());
 
         if (!taskListPermissionCheckService.isUpdateAllowed(updateTaskDto.getUserId(), task.getTaskList().getId())) {
-            throw new CoreDomainException("Update not allowed!");
+            throw TaskException.operationNotAllowed();
         }
 
         task.setDueDate(updateTaskDto.getDueDate());

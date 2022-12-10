@@ -2,8 +2,8 @@ package rs.fon.plannerx.core.task.usecase.usertasklist;
 
 import lombok.AllArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
-import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.task.domain.UserTaskList;
+import rs.fon.plannerx.core.task.exception.TaskException;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.UpdateSharedUserTaskList;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.dto.UpdateSharedUserTaskListDto;
 import rs.fon.plannerx.core.task.ports.out.usertasklist.GetUserTaskList;
@@ -22,7 +22,7 @@ public class UpdateSharedUserTaskListUseCase implements UpdateSharedUserTaskList
                 updateSharedUserTaskListDto.getTargetTaskListId()
         );
         if (!userTaskList.isOwner()) {
-            throw new CoreDomainException("User doesn't own this task list");
+            throw TaskException.operationNotAllowed();
         }
         userTaskList = getUserTaskListService.get(
                 updateSharedUserTaskListDto.getTargetUserId(),

@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import rs.fon.plannerx.common.UseCase;
 import rs.fon.plannerx.core.account.domain.User;
+import rs.fon.plannerx.core.account.exception.UserException;
 import rs.fon.plannerx.core.account.ports.in.GetUser;
 import rs.fon.plannerx.core.account.ports.in.UpdateUser;
 import rs.fon.plannerx.core.account.ports.in.dto.UpdateUserDto;
-import rs.fon.plannerx.core.exception.CoreDomainException;
 
 @UseCase
 @RequiredArgsConstructor
@@ -25,13 +25,13 @@ public class UpdateUserUseCase implements UpdateUser {
         User user = this.getUserService.getById(updateUserDto.getId());
         if (updateUserDto.getPassword().length() > 0) {
             if (!this.passwordEncoder.matches(updateUserDto.getPassword(), user.getPassword())) {
-                throw new CoreDomainException(CoreDomainException.PASSWORD_DOES_NOT_MATCH);
+                throw UserException.passwordDoesNotMatch();
             }
             if (updateUserDto.getNewPassword().length() == 0) {
-                throw new CoreDomainException(CoreDomainException.NEW_PASSWORD_IS_BLANK);
+                throw UserException.newPasswordIsBlank();
             }
             if (!updateUserDto.getNewPassword().equals(updateUserDto.getRetypedPassword())) {
-                throw new CoreDomainException(CoreDomainException.NEW_PASSWORDS_DO_NOT_MATCH);
+                throw UserException.newPasswordsDoNotMatch();
             }
             user.setPassword(this.passwordEncoder.encode(updateUserDto.getNewPassword()));
         }

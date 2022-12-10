@@ -2,9 +2,9 @@ package rs.fon.plannerx.core.task.service;
 
 import lombok.AllArgsConstructor;
 import rs.fon.plannerx.common.DomainService;
-import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.task.domain.TaskListPermission;
 import rs.fon.plannerx.core.task.domain.UserTaskList;
+import rs.fon.plannerx.core.task.exception.TaskException;
 import rs.fon.plannerx.core.task.ports.out.usertasklist.GetUserTaskList;
 
 
@@ -35,7 +35,7 @@ public class TaskListPermissionCheckService implements TaskListPermissionCheckIn
     private UserTaskList getUserTaskList(int userId, int taskListId) {
         UserTaskList userTaskList = this.getUserTaskListService.get(userId, taskListId);
         if (userTaskList == null) {
-            throw new CoreDomainException("User doesn't own this task list");
+            throw TaskException.operationNotAllowed();
         }
         return userTaskList;
     }

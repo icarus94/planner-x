@@ -2,8 +2,8 @@ package rs.fon.plannerx.core.task.usecase.task;
 
 import lombok.AllArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
-import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.task.domain.Task;
+import rs.fon.plannerx.core.task.exception.TaskException;
 import rs.fon.plannerx.core.task.ports.in.task.CreateTask;
 import rs.fon.plannerx.core.task.ports.in.task.dto.CreateTaskDto;
 import rs.fon.plannerx.core.task.ports.out.task.SaveTask;
@@ -23,7 +23,7 @@ public class CreateTaskUseCase implements CreateTask {
     @Override
     public void create(CreateTaskDto createTaskDto) {
         if (!taskListPermissionCheckService.isUpdateAllowed(createTaskDto.getUserId(), createTaskDto.getTaskListId())) {
-            throw new CoreDomainException("Update not allowed!");
+            throw TaskException.operationNotAllowed();
         }
 
         Task task = new Task();

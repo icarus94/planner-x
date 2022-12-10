@@ -4,10 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Value;
 import rs.fon.plannerx.common.SelfValidating;
 
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Value
 @EqualsAndHashCode(callSuper = false)
@@ -15,6 +12,7 @@ public class UpdateUserDto extends SelfValidating<UpdateUserDto> {
 
     @NotNull
     @Digits(fraction = 0, integer = 12)
+    @Positive
     int id;
 
     @NotNull

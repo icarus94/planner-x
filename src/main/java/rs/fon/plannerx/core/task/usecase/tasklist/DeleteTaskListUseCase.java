@@ -2,8 +2,8 @@ package rs.fon.plannerx.core.task.usecase.tasklist;
 
 import lombok.RequiredArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
-import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.task.domain.UserTaskList;
+import rs.fon.plannerx.core.task.exception.TaskException;
 import rs.fon.plannerx.core.task.ports.in.tasklist.DeleteTaskList;
 import rs.fon.plannerx.core.task.ports.in.tasklist.dto.DeleteTaskListDto;
 import rs.fon.plannerx.core.task.ports.out.usertasklist.DeleteUserTaskList;
@@ -24,7 +24,7 @@ public class DeleteTaskListUseCase implements DeleteTaskList {
     public void delete(DeleteTaskListDto deleteTaskListDto) {
 
         if (!taskListPermissionCheckService.isDeleteAllowed(deleteTaskListDto.getUserId(), deleteTaskListDto.getTaskListId())) {
-            throw new CoreDomainException("You don't have task list permission");
+            throw TaskException.operationNotAllowed();
         }
 
         Collection<UserTaskList> userTaskListCollection = getUserTaskListsService.getUserTaskListsByTaskListId(deleteTaskListDto.getTaskListId());

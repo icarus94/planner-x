@@ -2,8 +2,8 @@ package rs.fon.plannerx.core.task.usecase.task;
 
 import lombok.AllArgsConstructor;
 import rs.fon.plannerx.common.UseCase;
-import rs.fon.plannerx.core.exception.CoreDomainException;
 import rs.fon.plannerx.core.task.domain.Task;
+import rs.fon.plannerx.core.task.exception.TaskException;
 import rs.fon.plannerx.core.task.ports.in.task.DeleteTask;
 import rs.fon.plannerx.core.task.ports.in.task.dto.DeleteTaskDto;
 import rs.fon.plannerx.core.task.ports.out.task.GetTask;
@@ -21,7 +21,7 @@ public class DeleteTaskUseCase implements DeleteTask {
     public void delete(DeleteTaskDto deleteTaskDto) {
         Task task = this.getTaskService.get(deleteTaskDto.getTaskId());
         if (!taskListPermissionCheckService.isUpdateAllowed(deleteTaskDto.getUserId(), task.getTaskList().getId())) {
-            throw new CoreDomainException("Delete not allowed!");
+            throw TaskException.operationNotAllowed();
         }
         this.deleteTaskService.delete(task);
     }

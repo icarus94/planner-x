@@ -14,8 +14,8 @@ import rs.fon.plannerx.application.web.security.CurrentUser;
 import rs.fon.plannerx.application.web.security.UserPrincipal;
 import rs.fon.plannerx.application.web.sitemap.SiteMap;
 import rs.fon.plannerx.common.WebAdapter;
-import rs.fon.plannerx.core.mail.ports.in.SendInvitation;
-import rs.fon.plannerx.core.mail.ports.in.dto.InvitationDto;
+import rs.fon.plannerx.core.account.ports.in.SendInvitation;
+import rs.fon.plannerx.core.account.ports.in.dto.InvitationDto;
 
 import javax.validation.constraints.Email;
 

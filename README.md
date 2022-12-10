@@ -53,7 +53,24 @@ Docker components - for dev
 
 ![System Context](./documents/images/legend.png)
 
-###  
+### Packages
+
+#### *CORE (rs.fon.plannerx.core)*
+
+Is for domain models, use cases, services related to domain logic and ports for I/O.
+
+#### *INFRASTRUCTURE (rs.fon.plannerx.infrastructure)*
+
+Is for persistence, mail notifier etc. Mostly anything that CORE package relies on via ports
+
+#### *APPLICATION (rs.fon.plannerx.application)*
+
+Web Adapters, Web Security & configuration(view resolver, internalization, static resource register, etc.)
+
+#### *COMMON (rs.fon.plannerx.common)*
+
+Annotations for usage, any package should be able to use it
+
 
 </details>
 

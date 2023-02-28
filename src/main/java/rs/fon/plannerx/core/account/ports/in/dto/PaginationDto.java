@@ -7,17 +7,17 @@ import rs.fon.plannerx.common.SelfValidating;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 @Value
 @EqualsAndHashCode(callSuper = false)
 public class PaginationDto extends SelfValidating<PaginationDto> {
     @Digits(fraction = 0, integer = 12)
-    @Positive
+    @PositiveOrZero
     int page;
 
     @Digits(fraction = 0, integer = 12)
-    @Positive
+    @PositiveOrZero
     int pageSize;
 
     @NotNull

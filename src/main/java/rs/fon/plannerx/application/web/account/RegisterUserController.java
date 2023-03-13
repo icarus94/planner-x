@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import rs.fon.plannerx.application.web.messages.FlashMessageFactory;
 import rs.fon.plannerx.application.web.messages.Message;
 import rs.fon.plannerx.application.web.sitemap.SiteMap;
@@ -30,7 +31,7 @@ public class RegisterUserController {
     }
 
     @PostMapping(SiteMap.REGISTER)
-    public void register(
+    public RedirectView register(
             @RequestParam(name = "name") String name,
             @RequestParam(name = "surname") String surname,
             @RequestParam(name = "email") String email,
@@ -52,6 +53,6 @@ public class RegisterUserController {
                 Message.PLACEHOLDER,
                 flashMessageFactory.successFlashMessage(Message.USER_REGISTERED)
         );
-        response.sendRedirect(SiteMap.LOGIN);
+        return new RedirectView(SiteMap.LOGIN);
     }
 }

@@ -1,9 +1,14 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
 <!-- Modal -->
-<th:block th:fragment="editTask(task)">
+<th:block th:fragment="editTask(task)" th:with="Permision=${T(rs.fon.plannerx.core.task.domain.TaskListPermission)}">
     <!--/*@thymesVar id="task" type="rs.fon.plannerx.core.task.domain.Task"*/-->
     <a class="btn btn-light text-warning btn-sm" data-bs-toggle="modal"
        th:attr="data-bs-target='#edit-task-'+${task.id}"
-       type="button">
+       type="button"
+       th:hidden="${userTaskList.isOwner() == false && userTaskList.getPermission() == Permision.READ}">
         <i class="fas fa-edit"></i>
     </a>
 

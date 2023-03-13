@@ -42,7 +42,9 @@ $(document).ready(function () {
         location.search = queryParams.toString();
     });
 
-    $('#collapse-expand-all-btn').click(function () {
+    $('#collapse-expand-all-btn').click(expandAndCollapseBtn);
+
+    function expandAndCollapseBtn(isAuto) {
         let expanded = $(this).attr('aria-expanded');
         expanded = (expanded === "true");
         $('.task-table-expand-btn').each(function (index, element) {
@@ -54,5 +56,13 @@ $(document).ready(function () {
             }
         });
         $(this).attr('aria-expanded', !expanded);
-    });
+        if (isAuto !== true) {
+            localStorage.setItem('is_expanded', !expanded ? '1' : '0');
+        }
+    }
+
+    if(window.location.pathname === '/task/my-task-lists' && localStorage.getItem('is_expanded') === '1') {
+        let btn = $('#collapse-expand-all-btn');
+        expandAndCollapseBtn(true);
+    }
 });

@@ -1,9 +1,10 @@
-<th:block th:fragment="removeTask(taskList)">
+<th:block th:fragment="removeTask(taskList)" th:with="Permision=${T(rs.fon.plannerx.core.task.domain.TaskListPermission)}">
     <!-- Button trigger modal -->
     <!--/*@thymesVar id="task" type="rs.fon.plannerx.core.task.domain.Task"*/-->
     <a class="btn btn-light text-danger btn-sm" data-bs-toggle="modal"
        th:attr="data-bs-target='#remove-task-'+${task.id}"
-       type="button">
+       type="button"
+       th:hidden="${userTaskList.isOwner() == false && userTaskList.getPermission() == Permision.READ}">
         <i class="fas fa-trash-alt"></i>
     </a>
 

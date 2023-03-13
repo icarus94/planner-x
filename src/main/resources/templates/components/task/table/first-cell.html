@@ -2,7 +2,7 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <!--/*@thymesVar id="task" type="rs.fon.plannerx.core.task.domain.Task"*/-->
-<div class="d-flex flex-row" layout:fragment="firstCell(task)">
+<div class="d-flex flex-row" layout:fragment="firstCell(task)" th:with="Permision=${T(rs.fon.plannerx.core.task.domain.TaskListPermission)}">
     <th:block th:if="${task.done == true}">
         <div class="bg-success priority-vertical-bar"></div>
     </th:block>
@@ -14,17 +14,10 @@
         </th:block>
     </th:block>
     <div class="form-check">
-        <th:block th:if="${task.done == true}">
-            <input checked class="form-check-input task-check"
-                   onclick="event.preventDefault();" th:attr="data-id=${task.id}"
-                   th:id="'task-id-'+${task.id}" type="checkbox"
-                   value="">
-        </th:block>
-        <th:block th:unless="${task.done == true}">
-            <input class="form-check-input task-check" onclick="event.preventDefault();"
-                   th:attr="data-id=${task.id}" th:id="'task-id-'+${task.id}"
-                   type="checkbox" value="">
-        </th:block>
+        <input checked class="form-check-input task-check" th:checked="${task.done == true}"
+               onclick="event.preventDefault();" th:attr="data-id=${task.id}"
+               th:id="'task-id-'+${task.id}" type="checkbox"
+               value="" th:disabled="${userTaskList.isOwner() == false && userTaskList.getPermission() == Permision.READ}">
         <label class="form-check-label" th:for="'task-id-'+${task.getId()}">
         </label>
     </div>

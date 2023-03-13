@@ -2,7 +2,8 @@
     <!-- Button trigger modal -->
     <!--/*@thymesVar id="taskList" type="rs.fon.plannerx.core.task.domain.TaskList"*/-->
     <a class="btn btn-light btn-sm" data-bs-toggle="modal" th:attr="data-bs-target='#edit-task-list-'+${taskList.id}"
-       type="button">
+       type="button"
+    th:hidden="${userTaskList.isOwner() == false}">
         <i class="fas fa-cog"></i>
     </a>
     <!-- Modal -->

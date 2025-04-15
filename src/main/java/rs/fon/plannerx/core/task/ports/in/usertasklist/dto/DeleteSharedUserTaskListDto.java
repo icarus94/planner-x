@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Value
 @EqualsAndHashCode(callSuper = false)
-public class RemoveUserFromSharedTaskListDto extends SelfValidating<RemoveUserFromSharedTaskListDto> {
+public class DeleteSharedUserTaskListDto extends SelfValidating<DeleteSharedUserTaskListDto> {
     @NotNull
     @Digits(fraction = 0, integer = 12)
     int invokerUserId;
@@ -22,7 +22,7 @@ public class RemoveUserFromSharedTaskListDto extends SelfValidating<RemoveUserFr
     @Digits(fraction = 0, integer = 12)
     int targetTaskListId;
 
-    public RemoveUserFromSharedTaskListDto(int invokerUserId, int targetUserId, int targetTaskListId) {
+    public DeleteSharedUserTaskListDto(int invokerUserId, int targetUserId, int targetTaskListId) {
         this.invokerUserId = invokerUserId;
         this.targetUserId = targetUserId;
         this.targetTaskListId = targetTaskListId;

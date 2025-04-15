@@ -26,10 +26,18 @@ public class TaskListPermissionCheckService implements TaskListPermissionCheckIn
     }
 
     @Override
-    public boolean isDeleteAllowed(int userId, int taskListId) {
+    public boolean isDeleteTaskAllowed(int userId, int taskListId) {
         UserTaskList userTaskList = this.getUserTaskList(userId, taskListId);
         TaskListPermission taskListPermission = userTaskList.getPermission();
         return taskListPermission.equals(TaskListPermission.ALL);
+    }
+
+    @Override
+    public boolean isDeleteTaskListAllowed(int userId, int taskListId) {
+        UserTaskList userTaskList = this.getUserTaskList(userId, taskListId);
+        TaskListPermission taskListPermission = userTaskList.getPermission();
+
+        return taskListPermission.equals(TaskListPermission.ALL) && userTaskList.isOwner();
     }
 
     private UserTaskList getUserTaskList(int userId, int taskListId) {

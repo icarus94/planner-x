@@ -20,7 +20,7 @@ public class DeleteTaskUseCase implements DeleteTask {
     @Override
     public void delete(DeleteTaskDto deleteTaskDto) {
         Task task = this.getTaskService.get(deleteTaskDto.getTaskId());
-        if (!taskListPermissionCheckService.isUpdateAllowed(deleteTaskDto.getUserId(), task.getTaskList().getId())) {
+        if (!taskListPermissionCheckService.isDeleteTaskAllowed(deleteTaskDto.getUserId(), task.getTaskList().getId())) {
             throw TaskException.operationNotAllowed();
         }
         this.deleteTaskService.delete(task);

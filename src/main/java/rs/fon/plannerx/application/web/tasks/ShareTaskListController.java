@@ -18,10 +18,10 @@ import rs.fon.plannerx.common.WebAdapter;
 import rs.fon.plannerx.core.task.domain.TaskListPermission;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.CreateSharedUserTaskList;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.GetSharedUserTaskLists;
-import rs.fon.plannerx.core.task.ports.in.usertasklist.RemoveSharedUserTaskList;
+import rs.fon.plannerx.core.task.ports.in.usertasklist.DeleteSharedUserTaskList;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.UpdateSharedUserTaskList;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.dto.CreateSharedUserTaskListDto;
-import rs.fon.plannerx.core.task.ports.in.usertasklist.dto.RemoveUserFromSharedTaskListDto;
+import rs.fon.plannerx.core.task.ports.in.usertasklist.dto.DeleteSharedUserTaskListDto;
 import rs.fon.plannerx.core.task.ports.in.usertasklist.dto.UpdateSharedUserTaskListDto;
 
 @WebAdapter
@@ -33,7 +33,7 @@ public class ShareTaskListController {
     private final GetSharedUserTaskLists getSharedUserTaskListsService;
     private final CreateSharedUserTaskList createSharedUserTaskListService;
     private final UpdateSharedUserTaskList updateSharedUserTaskListService;
-    private final RemoveSharedUserTaskList removeSharedUserTaskListService;
+    private final DeleteSharedUserTaskList deleteSharedUserTaskListService;
     private final FlashMessageFactory flashMessageFactory;
 
 
@@ -101,8 +101,8 @@ public class ShareTaskListController {
             @RequestParam(name = "taskListId") int targetTaskListId,
             RedirectAttributes redirectAttributes
     ) {
-        this.removeSharedUserTaskListService.remove(
-                new RemoveUserFromSharedTaskListDto(
+        this.deleteSharedUserTaskListService.delete(
+                new DeleteSharedUserTaskListDto(
                         userPrincipal.getId(),
                         targetUserId,
                         targetTaskListId

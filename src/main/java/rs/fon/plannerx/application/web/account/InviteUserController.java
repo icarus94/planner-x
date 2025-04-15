@@ -39,7 +39,7 @@ public class InviteUserController {
             @Email @RequestParam("invite_email") String email,
             RedirectAttributes redirectAttributes
     ) {
-        sendInvitationUseCase.send(
+        sendInvitationUseCase.invite(
                 new InvitationDto(
                         userPrincipal.getId(),
                         email

@@ -1,6 +1,8 @@
 package rs.fon.plannerx.infrastructure.persistence.tasks.entity;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -26,5 +28,6 @@ public class TaskListJpaEntity {
     String name;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "taskList", fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     Set<TaskJpaEntity> tasks;
 }

@@ -24,7 +24,7 @@ import java.util.Set;
 @AdminPermission
 public class UsersController {
 
-    private final GetUsersWithRegularRole getUsersWithRegularRoleService;
+    private final GetUsersWithRegularRole getUsersService;
 
     @GetMapping(SiteMap.ADMIN_USERS)
     public void getPage() {
@@ -41,7 +41,7 @@ public class UsersController {
     ) {
         Map<String, Object> result = new HashMap<>();
 
-        Set<User> users = getUsersWithRegularRoleService.getPaginated(
+        Set<User> users = getUsersService.getPaginated(
                 new PaginationDto(
                         start / length,
                         length,
@@ -51,8 +51,8 @@ public class UsersController {
         );
         result.put("data", users);
         result.put("draw", draw);
-        result.put("recordsTotal", getUsersWithRegularRoleService.getTotalCount());
-        result.put("recordsFiltered", getUsersWithRegularRoleService.getTotalCount());
+        result.put("recordsTotal", getUsersService.getTotalCount());
+        result.put("recordsFiltered", getUsersService.getTotalCount());
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

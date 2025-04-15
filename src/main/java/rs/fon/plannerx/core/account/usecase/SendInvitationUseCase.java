@@ -21,7 +21,7 @@ public class SendInvitationUseCase implements SendInvitation {
     private final GetInvitationHtml getInvitationHtmlService;
 
     @Override
-    public void send(InvitationDto invitationDto) {
+    public void invite(InvitationDto invitationDto) {
         User targetUser = this.getUserService.getByEmail(invitationDto.getSendingToEmail());
         if (targetUser != null) {
             throw UserException.invitedUserIsAlreadyRegistered();

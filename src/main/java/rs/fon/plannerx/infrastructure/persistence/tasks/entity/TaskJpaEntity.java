@@ -47,7 +47,7 @@ public class TaskJpaEntity {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "done_by_user_id", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     UserJpaEntity doneBy;
 
     @ManyToOne(fetch = FetchType.LAZY)

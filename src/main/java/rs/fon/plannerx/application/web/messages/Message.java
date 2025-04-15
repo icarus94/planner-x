@@ -28,6 +28,8 @@ public class Message {
             USER_INVITED = "invite-user.flash.message.success",
             USER_EDITED = "Account has been modified",
             USER_REGISTERED = "Successfully registered",
+            USER_REGISTERED_CONFIRM_MAIL = "Successfully registered, please check your email to confirm",
+            USER_MAIL_CONFIRMED = "Successfull maile confirmation, you can now login",
             USER_ACTIVE_STATUS_CHANGED = "User account status changed";
 
 

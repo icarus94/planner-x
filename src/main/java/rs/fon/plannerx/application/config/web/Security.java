@@ -51,7 +51,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .authorizeRequests()
-                .mvcMatchers(SiteMap.LOGIN, SiteMap.REGISTER, SiteMap.LOGIN_FAILED)
+                .mvcMatchers(SiteMap.LOGIN, SiteMap.REGISTER, SiteMap.LOGIN_FAILED, SiteMap.MAIL_VERIFY)
                 .anonymous()
                 .and()
                 .formLogin()

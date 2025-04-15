@@ -14,7 +14,8 @@ public class UserTest {
                 "name",
                 "surname",
                 "password1",
-                UserRole.ROLE_REGULAR
+                UserRole.ROLE_REGULAR,
+                "token"
         );
 
         Assertions.assertEquals(1, user.getId());
@@ -24,6 +25,7 @@ public class UserTest {
         Assertions.assertEquals("surname", user.getSurname());
         Assertions.assertEquals("password1", user.getPassword());
         Assertions.assertEquals(UserRole.ROLE_REGULAR, user.getRole());
+        Assertions.assertEquals("token", user.getVerificationToken());
     }
 
     @Test

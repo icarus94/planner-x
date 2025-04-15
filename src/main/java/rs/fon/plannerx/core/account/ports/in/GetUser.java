@@ -6,4 +6,6 @@ public interface GetUser {
     User getByEmail(String email);
 
     User getById(int id);
+
+    User getByToken(String token);
 }

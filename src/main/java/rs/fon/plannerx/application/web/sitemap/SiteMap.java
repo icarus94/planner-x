@@ -11,7 +11,8 @@ public class SiteMap {
             LOGIN_FAILED = "/account/login?error",
             LOGIN_FAILED_ACCOUNT_NOT_ACTIVE = "/account/login?error=not-active",
             LOGOUT_SUCCESS = "/account/login?logout",
-            REGISTER = "/account/register";
+            REGISTER = "/account/register",
+            MAIL_VERIFY = "/account/verify-email";
 
     // REGULAR USER
     public final static String

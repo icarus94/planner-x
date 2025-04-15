@@ -51,4 +51,6 @@ public class UserJpaEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    private String verificationToken;
 }

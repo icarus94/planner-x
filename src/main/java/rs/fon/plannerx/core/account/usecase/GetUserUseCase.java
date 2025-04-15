@@ -21,4 +21,9 @@ public class GetUserUseCase implements GetUser {
     public User getById(int id) {
         return getUserService.getById(id);
     }
+
+    @Override
+    public User getByToken(String token) {
+        return getUserService.getByToken(token);
+    }
 }

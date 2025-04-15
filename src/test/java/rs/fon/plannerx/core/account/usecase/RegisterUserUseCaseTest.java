@@ -11,6 +11,7 @@ import rs.fon.plannerx.core.account.domain.UserRole;
 import rs.fon.plannerx.core.account.ports.in.dto.RegisterUserDto;
 import rs.fon.plannerx.core.account.ports.out.DoesUserExist;
 import rs.fon.plannerx.core.account.ports.out.SaveUser;
+import rs.fon.plannerx.core.account.ports.out.SendEmailVerification;
 import rs.fon.plannerx.core.exception.CoreDomainException;
 
 import static org.mockito.BDDMockito.*;
@@ -23,11 +24,14 @@ public class RegisterUserUseCaseTest {
 
     private PasswordEncoder passwordEncoder;
 
+    private SendEmailVerification sendEmailVerification;
+
     @BeforeEach
     void init() {
         saveUserService = Mockito.mock(SaveUser.class);
         doesUserExistService = Mockito.mock(DoesUserExist.class);
         passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        sendEmailVerification = Mockito.mock(SendEmailVerification.class);
     }
 
     @Test
@@ -42,7 +46,7 @@ public class RegisterUserUseCaseTest {
                 "pass1",
                 "pass1"
         );
-        RegisterUserUseCase registerUserUseCase = new RegisterUserUseCase(saveUserService, doesUserExistService, passwordEncoder);
+        RegisterUserUseCase registerUserUseCase = new RegisterUserUseCase(saveUserService, doesUserExistService, passwordEncoder, sendEmailVerification);
 
         // act
         registerUserUseCase.register(registerUserDto);
@@ -70,7 +74,12 @@ public class RegisterUserUseCaseTest {
 
         given(doesUserExistService.doesExistByEmail(eq(registerUserDto.getEmail()))).willReturn(true);
 
-        RegisterUserUseCase registerUserUseCase = new RegisterUserUseCase(saveUserService, doesUserExistService, passwordEncoder);
+        RegisterUserUseCase registerUserUseCase = new RegisterUserUseCase(
+                saveUserService,
+                doesUserExistService,
+                passwordEncoder,
+                sendEmailVerification
+        );
 
         // act
         Assertions.assertThrows(CoreDomainException.class, () -> {

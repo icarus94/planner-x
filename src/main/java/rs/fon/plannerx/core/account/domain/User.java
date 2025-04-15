@@ -15,4 +15,5 @@ public class User {
     private String surname;
     private String password;
     private UserRole role;
+    private String verificationToken;
 }

@@ -35,6 +35,12 @@ public class UserPersistenceAdapter implements GetUser, SaveUser, UpdateUser, Ge
     }
 
     @Override
+    public User getByToken(String token) {
+        UserJpaEntity userJpaEntity = userSpringDataRepository.getByVerificationToken(token);
+        return userMapper.mapToEntity(userJpaEntity);
+    }
+
+    @Override
     public void save(User user) {
         UserJpaEntity userJpaEntity = userMapper.mapToJpaEntity(user);
         userSpringDataRepository.save(userJpaEntity);

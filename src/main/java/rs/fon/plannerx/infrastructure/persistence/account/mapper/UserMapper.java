@@ -18,11 +18,16 @@ public class UserMapper {
                 userJpaEntity.getName(),
                 userJpaEntity.getSurname(),
                 userJpaEntity.getPassword(),
-                userJpaEntity.getRole()
+                userJpaEntity.getRole(),
+                userJpaEntity.getVerificationToken()
         );
     }
 
     public UserJpaEntity mapToJpaEntity(User user) {
+        if (user == null) {
+            return null;
+        }
+
         return new UserJpaEntity(
                 user.getId(),
                 user.isActive(),
@@ -30,7 +35,8 @@ public class UserMapper {
                 user.getName(),
                 user.getPassword(),
                 user.getSurname(),
-                user.getRole()
+                user.getRole(),
+                user.getVerificationToken()
         );
     }
 }                                     

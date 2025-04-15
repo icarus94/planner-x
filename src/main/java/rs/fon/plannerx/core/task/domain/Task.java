@@ -1,6 +1,7 @@
 package rs.fon.plannerx.core.task.domain;
 
 import lombok.*;
+import rs.fon.plannerx.core.account.domain.User;
 
 import java.time.LocalDateTime;
 
@@ -17,5 +18,6 @@ public class Task {
     private TaskPriority taskPriority;
     private LocalDateTime dateAdded;
     private LocalDateTime dateModified;
+    private User doneBy;
     private TaskList taskList;
 }

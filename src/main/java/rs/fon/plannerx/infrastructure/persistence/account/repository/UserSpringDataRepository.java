@@ -15,6 +15,8 @@ public interface UserSpringDataRepository extends JpaRepository<UserJpaEntity, I
 
     int countAllByRole(UserRole userRole);
 
+    UserJpaEntity getByVerificationToken(String token);
+
     @Query(value = "FROM UserJpaEntity WHERE role = rs.fon.plannerx.core.account.domain.UserRole.ROLE_REGULAR")
     List<UserJpaEntity> findAllWithRegularRole(Pageable pageable);
 }

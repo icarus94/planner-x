@@ -1,9 +1,12 @@
 package rs.fon.plannerx.infrastructure.persistence.tasks.entity;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import rs.fon.plannerx.core.task.domain.TaskPriority;
+import rs.fon.plannerx.infrastructure.persistence.account.entity.UserJpaEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -41,6 +44,11 @@ public class TaskJpaEntity {
     @LastModifiedDate
     @Column(nullable = false)
     LocalDateTime dateModified;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "done_by_user_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    UserJpaEntity doneBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_list_id", nullable = false)

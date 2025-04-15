@@ -42,7 +42,7 @@ services:
           - plannerx.docker
     command: sh docker/run.sh
     ports:
-      - 8085:8085
+      - 8097:8085
       - 35729:35729
       - 5005:5005
 networks:
